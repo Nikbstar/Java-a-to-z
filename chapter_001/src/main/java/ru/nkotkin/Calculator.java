@@ -51,7 +51,7 @@ public class Calculator {
 	public double getResult() {
 		return result;
 	}
-/*	public void clearResult() {
+	public void clearResult() {
 		this.result = 0;
-	}*/
+	}
 }

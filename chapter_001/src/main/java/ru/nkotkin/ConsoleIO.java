@@ -1,6 +1,8 @@
 package ru.nkotkin;
-public class ConsoleIO implements IO {
-	private static final Logger Log = LoggerFactory.getLogger(ConsoleIO.class);
+
+
+public class ConsoleIO /*implements IO*/ {
+/*	private static final Logger Log = LoggerFactory.getLogger(ConsoleIO.class);
 	private final Scanner scanner;
 	private final PrintStream out;
 	
@@ -15,5 +17,5 @@ public class ConsoleIO implements IO {
 	@Override
 	public void println(Object value) {
 		this.out.println(value);
-	}
+	}*/
 }
