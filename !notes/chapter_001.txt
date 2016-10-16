@@ -1,0 +1,29 @@
+1. JVM. Byte code.
+	Структура файла *.java:
+		package nkotkin; // должно совпадать с папкой пакета
+		public class Calculate { // должно совпадать с именем файла
+			public static void mine(String[] args) { // Не обязательно. Запускающий метод
+			}
+		}
+	Компиляция:
+		javac -d out src\nkotkin\Calculate.java // Скомпилировать файл Calculate.java в папку \out
+	Запуск:
+		java -cp out ru.nkotkin.Calculate // Запустить из папки out класс Calculate с пакетом nkotkin
+		java -cp java-a-from-z-1.0.jar ru.nkotkin.Calculate // Запуск после maven
+2. Тип данных.
+	Примитивные (primitive)
+		byte, char, int, long, float, double
+	Ссылочные (reference)
+		Object
+
+public class RefTask {
+	public static void main(String[] args) {
+		Integer value = 1;
+		RefTask.change(value);
+		System.out.println(value);
+	}
+
+	public static void change(Integer that) {
+		that++;
+	}
+}
