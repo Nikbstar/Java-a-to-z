@@ -1,18 +1,20 @@
 package ru.nkotkin;
 
 public class Calculator {
-	
+
 	private double result;
-	
-	// Слодение
+
+	// РЎР»РѕР¶РµРЅРёРµ
 	public void add(double first, double second) {
 		this.result = first + second;
 	}
-	// Вычитание
+
+	// Р’С‹С‡РёС‚Р°РЅРёРµ
 	public void substruct(double first, double second) {
 		this.result = first - second;
 	}
-	// Деление
+
+	// Р”РµР»РµРЅРёРµ
 	public void div(double first, double second) {
 		if(second != 0d) {
 			this.result = first / second;
@@ -20,8 +22,15 @@ public class Calculator {
 			throw new ArithmeticException("Cound not div by 0");
 		}
 	}
-	// Умножение
+
+	// РЈРјРЅРѕР¶РµРЅРёРµ
 	public void multiple(double first, double second) {
 		this.result = first * second;
 	}
+
+	// РџРѕР»СѓС‡РёС‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚
+	public double getResult() {
+		return this.result;
+	}
+
 }

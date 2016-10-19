@@ -44,4 +44,15 @@ Maven:
 			clean // очистить проект
 			package // компил€ци€, тестирование и сборка в архив
 		mvn install // добавить в локальный репозиторий
-			
+“естирование Junit
+	package ru.nkotkin;
+	import org.junit.Test;
+	import static org.junit.Assert.*;
+	public class <ClassName>Test {
+		
+		@Test
+		public void whenThen() {
+			......
+			assertEquals(<ќжидаемый–езультат>, <ѕолученный–езультат>);
+		}
+	}
