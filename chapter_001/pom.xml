@@ -5,6 +5,7 @@
 	<version>1.0</version>
 	<packaging>pom</packaging>
 	<modules>
+		<module>lesson_00</module>
 		<module>lesson_01</module>
 		<module>lesson_02</module>
 		<module>lesson_03</module>
