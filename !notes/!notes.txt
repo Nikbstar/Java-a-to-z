@@ -56,7 +56,7 @@ GitHub:
 			Folder/
 			# Игнорировать все файлы с расширением .fileType
 			*.fileType
-	
+
 Maven:
 	Структура папок:
 		src/main/java // Исходныйы код
@@ -78,15 +78,61 @@ Maven:
 			clean // очистить проект
 			package // компиляция, тестирование и сборка в архив
 		mvn install // добавить в локальный репозиторий
-Тестирование Junit
-	package ru.nkotkin;
-	import org.junit.Test;
-	import static org.junit.Assert.*;
-	public class <ClassName>Test {
-		
-		@Test
-		public void whenThen() {
-			......
-			assertEquals(<ОжидаемыйРезультат>, <ПолученныйРезультат>);
+Тестирование (Junit)
+	В любой программе должны быть входящие и выходящие данные. Тестировать нужно именно эти данные.
+	В тестах содержатся только public void методы
+	Принцип ААА:
+		А – Assign – блок для создания и инициализации входящих, ожидаемых и проверяемых данных.
+		A – Act – блок выполнения действий.
+		А – Assert – блок проверки ожидаемых данных и полученных.
+	assert:
+		Для doublde:
+			private final double DELTA = 1e-15;
+				// result - полученный результат
+				// closeTo(2.0, DELTA) - ожидаемый результат, с точностью сравнения DELTA
+			assertThat(result, closeTo(2.0, DELTA));
+				// или
+			assertEquals(<ОжидаемыйРезультат>, <ПолученныйРезультат>, DELTA);
+				// или без DELTA но с import static org.hamcrest.core.Is.is;
+			assertThat(result, is(2.0));
+	Пример:
+		package ru.nkotkin;
+		import org.junit.Test; // для @Test
+		import org.junit.Ignore; // для @Ignore
+		import static org.hamcrest.core.Is.is; // для is() в assertThat
+		import static org.junit.Assert.*;
+		public class <ClassName>Test {
+			@Test
+			public void whenThen() {
+				// Assign block с переменными
+				......
+				// Act block с вызовом тестируемого метода
+				......
+				// Assert block сравнения результатов
+				assertThat(<ПолученныйРезультат>, is(<ОжидаемыйРезультат>));
+			}
 		}
-	}
+
+JavaDoc (Документирование в Java)
+	Пример:
+		JavaDoc для класса:
+			/**
+			 * Class Описание класса
+			 * @author nkotkin
+			 * @since 20.10.2016
+			 * @version 1.0
+			 */
+		JavaDoc для метода:
+			/**
+			 * Описание метода
+			 * @param firstParam описание первого аргумента
+			 * @param secondParam описание второго аргумента
+			 * @return результат
+			 */
+	Теги:
+		@param name – description – Описывает входящий параметр.
+		@return name – description – описывает возвращаемый тип.
+		@throws – описывает возможные исключения, которые может кинуть код.
+		@author – имя и фамилия автора данного кода
+		@since – дата создания
+		@version – версия файла.
