@@ -18,6 +18,6 @@ public class Point {
 
 	public double distanceTo(Point point) {
 		//calculate distance between two points
-		return -1d;
+		return Math.sqrt(Math.pow((point.x - this.x), 2) + Math.pow((point.y - this.y), 2));
 	}
 }
