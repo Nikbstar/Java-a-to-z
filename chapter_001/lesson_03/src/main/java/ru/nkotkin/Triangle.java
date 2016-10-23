@@ -8,9 +8,8 @@ package ru.nkotkin;
  * @since 21.10.2016
  */
 public class Triangle {
-	public Point a;
-	public Point b;
-	public Point c;
+	private Point a, b, c;
+	public double lineA, lineB, lineC;
 
 	public Triangle(Point a, Point b, Point c) {
 		this.a = a;
@@ -20,16 +19,22 @@ public class Triangle {
 
 	public double area() {
 		//calculate the triangle area
-		double lineA = a.distanceTo(b);
-		double lineB = b.distanceTo(c);
-		double lineC = a.distanceTo(c);
-		double result;
-		if( lineA < lineB + lineC && lineB < lineA + lineC && lineC < lineA + lineB) {
-			double p = (lineA + lineB + lineC) / 2;
-			result = Math.sqrt(p * (p - lineA) * (p - lineB) * (p - lineC));
-		} else {
-			throw new ArithmeticException("Can't be build triangle");
-		}
+		if(!checkExist()) throw new ArithmeticException("Can't be build triangle");
+			
+		double p = (this.lineA + this.lineB + this.lineC) / 2;
+		return Math.sqrt(p * (p - this.lineA) * (p - this.lineB) * (p - this.lineC));
+	}
+
+	private boolean checkExist() {
+		boolean result = false;
+		this.lineA = a.distanceTo(b);
+		this.lineB = b.distanceTo(c);
+		this.lineC = a.distanceTo(c);
+
+		if(this.lineA < this.lineB + this.lineC &&
+			this.lineB < this.lineA + this.lineC &&
+			this.lineC < this.lineA + this.lineB) result = true;
 		return result;
+		
 	}
 }

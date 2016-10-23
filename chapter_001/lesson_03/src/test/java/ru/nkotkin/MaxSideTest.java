@@ -1,10 +1,11 @@
 package ru.nkotkin;
 
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
-
-public class TriangleMaxTest {
+@Ignore
+public class MaxSideTest {
 	@Test
 	public void whenAddTriangleThenReturnMaxLine() throws Exception {
 		Point a = new Point(0d, 0d);
@@ -12,8 +13,8 @@ public class TriangleMaxTest {
 		Point c = new Point(2d, 0d);
 		Triangle triangle = new Triangle(a, b, c);
 		
-		TriangleMax tMax = new TriangleMax(triangle);
+		MaxSide triangleMax = new MaxSide(triangle.lineA, triangle.lineB, triangle.lineC);
 
-		assertThat(tMax.Max(), is(2d));
+		assertThat(triangleMax.max(), is(2d));
 	}
 }
