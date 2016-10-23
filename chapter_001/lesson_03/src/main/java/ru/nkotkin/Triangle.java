@@ -8,8 +8,8 @@ package ru.nkotkin;
  * @since 21.10.2016
  */
 public class Triangle {
-	private Point a, b, c;
-	private double lineA, lineB, lineC;
+	final private Point a, b, c;
+	final private double lineA, lineB, lineC;
 
 	public Triangle(Point a, Point b, Point c) {
 		// Координаты точек

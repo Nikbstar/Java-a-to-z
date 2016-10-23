@@ -7,7 +7,7 @@ package ru.nkotkin;
  * @since 23.10.2016
  */
 public class MaxSide {
-	private double[] sides;
+	final private double[] sides;
 
 	public MaxSide(double... lines) {
 		this.sides = new double[lines.length];

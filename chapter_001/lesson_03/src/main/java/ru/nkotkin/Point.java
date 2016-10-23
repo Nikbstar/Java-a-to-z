@@ -7,8 +7,8 @@ package ru.nkotkin;
  * @since 20.10.2016
  */
 public class Point {
-	public double x;
-	public double y;
+	final public double x;
+	final public double y;
 
 	public Point(double x, double y) {
 		this.x = x;
