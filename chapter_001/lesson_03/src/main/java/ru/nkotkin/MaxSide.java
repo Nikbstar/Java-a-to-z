@@ -7,15 +7,18 @@ package ru.nkotkin;
  * @since 23.10.2016
  */
 public class MaxSide {
-	private double[] lines;
+	private double[] sides;
+
 	public MaxSide(double... lines) {
-		
+		this.sides = new double[lines.length];
+		System.arraycopy(lines, 0, this.sides, 0, lines.length);
 	}
+
 	public double max() {
-		double result = 0d;
-//		for (int iterator = 0; iterator < lines.length; iterator++) {
-//			result = (lines[iterator] > lines[iterator + 1]) ? lines[iterator] : lines[iterator + 1];
-//		}
+		double result = this.sides[0];
+		for(int iterator = 0; iterator != this.sides.length; iterator++) {
+			if(result < this.sides[iterator]) result = this.sides[iterator];
+		}
 		return result;
 	}
 }

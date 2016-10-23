@@ -9,32 +9,43 @@ package ru.nkotkin;
  */
 public class Triangle {
 	private Point a, b, c;
-	public double lineA, lineB, lineC;
+	private double lineA, lineB, lineC;
 
 	public Triangle(Point a, Point b, Point c) {
+		// Координаты точек
 		this.a = a;
 		this.b = b;
 		this.c = c;
+		// Длинны сторон
+		this.lineA = a.distanceTo(b);
+		this.lineB = b.distanceTo(c);
+		this.lineC = a.distanceTo(c);
+	}
+
+	public double getLineA() {
+		return this.lineA;
+	}
+	public double getLineB() {
+		return this.lineB;
+	}
+	public double getLineC() {
+		return this.lineC;
 	}
 
 	public double area() {
 		//calculate the triangle area
-		if(!checkExist()) throw new ArithmeticException("Can't be build triangle");
-			
+		if(!this.checkExist()) throw new ArithmeticException("Can't be build triangle because sides isn't correct!");
+
 		double p = (this.lineA + this.lineB + this.lineC) / 2;
 		return Math.sqrt(p * (p - this.lineA) * (p - this.lineB) * (p - this.lineC));
 	}
 
 	private boolean checkExist() {
 		boolean result = false;
-		this.lineA = a.distanceTo(b);
-		this.lineB = b.distanceTo(c);
-		this.lineC = a.distanceTo(c);
 
 		if(this.lineA < this.lineB + this.lineC &&
 			this.lineB < this.lineA + this.lineC &&
 			this.lineC < this.lineA + this.lineB) result = true;
 		return result;
-		
 	}
 }

@@ -10,11 +10,11 @@ public class TriangleTest {
 	@Test
 	public void whenAddPointsThenReturnArea() throws Exception {
 		// Assign
-		Point a = new Point(1d, 1d);
-		Point b = new Point(-2d, 4d);
-		Point c = new Point(-2d, -2d);
+		Point a = new Point(0d, 0d);
+		Point b = new Point(1d, 1d);
+		Point c = new Point(3d, 0d);
 		Triangle triangle = new Triangle(a, b, c);
-		double checked = 9d;
+		double checked = 1.5d;
 		// Act
 		double result = triangle.area();
 		// Assert
