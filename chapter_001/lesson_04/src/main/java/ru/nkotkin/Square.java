@@ -21,6 +21,10 @@ public class Square {
 		return this.a * x * x + this.b * x + this.c;
 	}
 	public void show(int start, int finish, int step) {
-		System.out.print("test");
+		if(step <= 0) throw new ArithmeticException("Step must be greater then 0");
+		if(finish < start) throw new ArithmeticException("Incorrect range. Start value must be greater then last");
+		for(int iterator = start; iterator <= finish; iterator+=step) {
+			System.out.println("x = " + iterator + ": y = " + this.calculate(iterator) + "");
+		}
 	}
 }
