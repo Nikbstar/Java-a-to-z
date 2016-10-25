@@ -18,9 +18,9 @@ public class Square {
 		this.c = c;
 	}
 	public float calculate (int x) {
-		return this.a * (x * x) + this.b * x + this.c;
+		return this.a * x * x + this.b * x + this.c;
 	}
-	public void show(float start, float finish, float step) {
-		
+	public void show(int start, int finish, int step) {
+		System.out.print("test");
 	}
 }
