@@ -8,23 +8,31 @@ package ru.nkotkin;
  * диапазоне от x1 до x2 c шагом step. 
  *
  * 2. Обязательно нужно добавить тесты проверяющие методы.
+ * 
+ * 1. System.out.println("x = " + iterator + ": y = " + this.calculate(iterator) + ""); - использовать String.format
+ * 
+ * 2. между методами обязательно ставлять пустую строку.
  */
 public class Square {
 	private float a, b, c;
-	
+
 	public Square(float a, float b, float c) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
 	}
+
 	public float calculate (int x) {
 		return this.a * x * x + this.b * x + this.c;
 	}
+
 	public void show(int start, int finish, int step) {
 		if(step <= 0) throw new ArithmeticException("Step must be greater then 0");
 		if(finish < start) throw new ArithmeticException("Incorrect range. Start value must be greater then last");
+		String result;
 		for(int iterator = start; iterator <= finish; iterator+=step) {
-			System.out.println("x = " + iterator + ": y = " + this.calculate(iterator) + "");
+			result = String.format("x = %d: y = %.1f", iterator, this.calculate(iterator));
+			System.out.println(result);
 		}
 	}
 }

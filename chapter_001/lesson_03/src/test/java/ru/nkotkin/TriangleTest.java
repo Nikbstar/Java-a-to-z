@@ -1,11 +1,10 @@
 package ru.nkotkin;
 
 import org.junit.Test;
-import org.junit.Ignore;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 import static org.junit.Assert.*;
-//@Ignore
+
 public class TriangleTest {
 	@Test
 	public void whenAddPointsThenReturnArea() throws Exception {
@@ -20,6 +19,7 @@ public class TriangleTest {
 		// Assert
 		assertThat(result, is(closeTo(checked, 0.0001)));
 	}
+
 	@Test(expected = ArithmeticException.class)
 	public void whenWrongLinesThenReturnException() throws Exception {
 		Point a = new Point(0d, 0d);

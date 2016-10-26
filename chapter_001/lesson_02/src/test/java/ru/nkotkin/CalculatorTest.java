@@ -28,6 +28,7 @@ public class CalculatorTest {
 		calculator.div(1d, 1d);
 		assertThat(calculator.getResult(), is(1d));
 	}
+
 	// Деление на 0
 	@Test(expected = ArithmeticException.class)
 	public void whenDivByZeroThenReturnError() throws Exception {

@@ -1,7 +1,6 @@
 package ru.nkotkin;
 
 public class Calculator {
-
 	private double result;
 
 	// Сложение
@@ -32,5 +31,4 @@ public class Calculator {
 	public double getResult() {
 		return this.result;
 	}
-
 }

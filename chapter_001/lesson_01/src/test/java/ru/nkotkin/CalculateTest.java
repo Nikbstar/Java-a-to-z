@@ -11,6 +11,7 @@ public class CalculateTest {
 		String result = calc.echo("stop");
 		assertThat(result, is("stop stop stop"));
 	}
+
 	@Test
 	public void whenSetNullInEchoThenReturnThreeNulls() throws Exception {
 		Calculate calc = new Calculate();

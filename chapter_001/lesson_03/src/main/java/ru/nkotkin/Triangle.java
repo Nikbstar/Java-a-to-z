@@ -25,9 +25,11 @@ public class Triangle {
 	public double getLineA() {
 		return this.lineA;
 	}
+
 	public double getLineB() {
 		return this.lineB;
 	}
+
 	public double getLineC() {
 		return this.lineC;
 	}

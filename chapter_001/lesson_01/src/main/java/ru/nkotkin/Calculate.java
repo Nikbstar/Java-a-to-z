@@ -10,6 +10,7 @@ public class Calculate {
 		final int summ = first + second;
 		System.out.println("Sum " + summ);
 	}
+
 	public String echo(String value) {
 		return String.format("%s %s %s", value, value, value);
 	}

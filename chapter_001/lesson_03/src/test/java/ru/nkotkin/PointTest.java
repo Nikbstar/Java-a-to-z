@@ -5,7 +5,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class PointTest {
-
 	@Test
 	public void whenAddCoordinatesThenReturnDistance() throws Exception {
 		// Assign
