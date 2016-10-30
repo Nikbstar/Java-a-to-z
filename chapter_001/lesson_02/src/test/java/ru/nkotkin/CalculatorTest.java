@@ -2,12 +2,13 @@ package ru.nkotkin;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static org.hamcrest.core.Is.is;
 
 public class CalculatorTest {
+
 	private Calculator calculator;
-	
+
 	@Before
 	public void inicialize() {
 		calculator = new Calculator();
@@ -46,4 +47,5 @@ public class CalculatorTest {
 		calculator.multiple(1.0, 1.0);
 		assertThat(calculator.getResult(), is(1d));
 	}
+
 }

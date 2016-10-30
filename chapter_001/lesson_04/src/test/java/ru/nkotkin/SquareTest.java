@@ -2,12 +2,14 @@ package ru.nkotkin;
 
 import org.junit.Test;
 import org.junit.Before;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class SquareTest {
+
 	private Square square;
 	
 	@Before
@@ -37,4 +39,5 @@ public class SquareTest {
 	public void whenIntoShowFinishLessStartThenExpection() {
 		square.show(1, 0, 1);
 	}
+
 }

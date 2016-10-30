@@ -14,6 +14,7 @@ package ru.nkotkin;
  * 2. между методами обязательно ставлять пустую строку.
  */
 public class Square {
+
 	private float a, b, c;
 
 	public Square(float a, float b, float c) {
@@ -27,12 +28,18 @@ public class Square {
 	}
 
 	public void show(int start, int finish, int step) {
-		if(step <= 0) throw new ArithmeticException("Step must be greater then 0");
-		if(finish < start) throw new ArithmeticException("Incorrect range. Start value must be greater then last");
+		if(step <= 0) {
+			throw new ArithmeticException("Step must be greater then 0");
+		}
+		if(finish < start) {
+			throw new ArithmeticException("Incorrect range. Start value must be greater then last");
+		}
+
 		String result;
 		for(int iterator = start; iterator <= finish; iterator+=step) {
 			result = String.format("x = %d: y = %.1f", iterator, this.calculate(iterator));
 			System.out.println(result);
 		}
 	}
+
 }

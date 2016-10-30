@@ -1,11 +1,12 @@
 package ru.nkotkin;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.number.IsCloseTo.closeTo;
-import static org.junit.Assert.*;
 
 public class TriangleTest {
+
 	@Test
 	public void whenAddPointsThenReturnArea() throws Exception {
 		// Assign
@@ -28,4 +29,5 @@ public class TriangleTest {
 		Triangle triangle = new Triangle(a, b, c);
 		triangle.area();
 	}
+
 }

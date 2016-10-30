@@ -7,6 +7,7 @@ package ru.nkotkin;
  * @since 20.10.2016
  */
 public class Point {
+
 	final public double x;
 	final public double y;
 
@@ -19,4 +20,5 @@ public class Point {
 		//calculate distance between two points
 		return Math.sqrt(Math.pow((point.x - this.x), 2) + Math.pow((point.y - this.y), 2));
 	}
+
 }

@@ -8,6 +8,7 @@ package ru.nkotkin;
  * @since 21.10.2016
  */
 public class Triangle {
+
 	final private Point a, b, c;
 	final private double lineA, lineB, lineC;
 
@@ -16,6 +17,7 @@ public class Triangle {
 		this.a = a;
 		this.b = b;
 		this.c = c;
+
 		// Длинны сторон
 		this.lineA = a.distanceTo(b);
 		this.lineB = b.distanceTo(c);
@@ -36,7 +38,9 @@ public class Triangle {
 
 	public double area() {
 		//calculate the triangle area
-		if(!this.checkExist()) throw new ArithmeticException("Can't be build triangle because sides isn't correct!");
+		if(!this.checkExist()) {
+			throw new ArithmeticException("Can't be build triangle because sides isn't correct!");
+		}
 
 		double p = (this.lineA + this.lineB + this.lineC) / 2;
 		return Math.sqrt(p * (p - this.lineA) * (p - this.lineB) * (p - this.lineC));
@@ -46,8 +50,10 @@ public class Triangle {
 		boolean result = false;
 
 		if(this.lineA < this.lineB + this.lineC &&
-			this.lineB < this.lineA + this.lineC &&
-			this.lineC < this.lineA + this.lineB) result = true;
+				this.lineB < this.lineA + this.lineC &&
+				this.lineC < this.lineA + this.lineB) {
+			result = true;
+		}
 		return result;
 	}
 }

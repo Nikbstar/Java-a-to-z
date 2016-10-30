@@ -1,4 +1,5 @@
 package ru.nkotkin;
+
 /**
  * 2. Создать класс с методом max - определяющий максимальную длинну 
  * стороны треугольника построенного из задание 1.
@@ -7,6 +8,7 @@ package ru.nkotkin;
  * @since 23.10.2016
  */
 public class MaxSide {
+
 	final private double[] sides;
 
 	public MaxSide(double... lines) {
@@ -17,8 +19,11 @@ public class MaxSide {
 	public double max() {
 		double result = this.sides[0];
 		for(int iterator = 0; iterator != this.sides.length; iterator++) {
-			if(result < this.sides[iterator]) result = this.sides[iterator];
+			if(result < this.sides[iterator]) {
+				result = this.sides[iterator];
+			}
 		}
 		return result;
 	}
+
 }

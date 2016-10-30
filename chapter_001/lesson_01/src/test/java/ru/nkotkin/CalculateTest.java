@@ -2,12 +2,13 @@ package ru.nkotkin;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static org.hamcrest.core.Is.is;
 
 public class CalculateTest {
+
 	private Calculate calc;
-	
+
 	@Before
 	public void inicialize() {
 		calc = new Calculate();
@@ -22,4 +23,5 @@ public class CalculateTest {
 	public void whenSetNullInEchoThenReturnThreeNulls() throws Exception {
 		assertThat(calc.echo(null), is("null null null"));
 	}
+
 }

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class FactorialTest {
+
 	private Factorial factorial;
 
 	@Before
@@ -27,4 +28,5 @@ public class FactorialTest {
 	public void whenAddLessZeroNumThenReturnExpension() {
 		factorial.calc(-1);
 	}
+
 }
