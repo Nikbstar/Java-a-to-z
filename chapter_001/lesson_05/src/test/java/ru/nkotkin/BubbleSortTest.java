@@ -6,7 +6,10 @@ import static org.hamcrest.core.Is.is;
 
 public class BubbleSortTest {
 	@Test
-	public void whenThen() {
-		
+	public void whenAddArrayThenGetSortArray() {
+		int values[] = {2, 1, 0};
+		int result[] = {0, 1, 2};
+		BubbleSort.doSort(values);
+		assertThat(result, is(values));
 	}
 }
