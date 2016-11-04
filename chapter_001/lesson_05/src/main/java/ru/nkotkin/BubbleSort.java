@@ -6,7 +6,7 @@ package ru.nkotkin;
  */
 public class BubbleSort {
 
-	public static void doSort(int[] values) {
+	public void doSort(int[] values) {
 		int tmp;
 		
 		for(int outsideIterator = values.length; outsideIterator != 0; outsideIterator--) {
