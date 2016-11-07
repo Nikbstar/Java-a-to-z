@@ -11,8 +11,8 @@ public class ArrayDuplicatesTest {
 		
 		ArrayDuplicates dblRemove = new ArrayDuplicates();
 		
-		String[] values = {"one", "two", "one", "three"};
-		String[] result = {"one", "two", null, "three"};
+		String[] values = {"one", "one", "one", "two"};
+		String[] result = {"one", "two", null, null};
 
 		dblRemove.doRemove(values);
 		assertThat(result, is(values));
