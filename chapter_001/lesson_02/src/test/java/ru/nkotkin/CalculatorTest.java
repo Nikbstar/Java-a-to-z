@@ -2,50 +2,74 @@ package ru.nkotkin;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class CalculatorTest {
+    /**
+     * Tests for Calculator.java.
+     */
+    public class CalculatorTest {
 
-	private Calculator calculator;
+    /**
+     * create calculator.
+     */
+    private Calculator calculator;
 
-	@Before
-	public void inicialize() {
-		calculator = new Calculator();
-	}
+    /**
+     * inicialize method.
+     */
+    @Before
+    public final void inicialize() {
+        calculator = new Calculator();
+    }
 
-	// Сложение
-	@Test
-	public void whenAddSixAndTwoThenReturnEight() throws Exception {
-		calculator.add(1d, 1d);
-		assertThat(calculator.getResult(), is(2d));
-	}
+    /**
+     * add testing.
+     * @throws Exception - any
+     */
+    @Test
+    public final void whenAddSixAndTwoThenReturnEight() throws Exception {
+        calculator.add(1d, 1d);
+        assertThat(calculator.getResult(), is(2d));
+    }
 
-	// Вычитание
-	@Test
-	public void whenSubstructSixAndTwoThenReturnFour() throws Exception {
-		calculator.substruct(2d, 1d);
-		assertThat(calculator.getResult(), is(1d));
-	}
+    /**
+     * substruct testing.
+     * @throws Exception - any
+     */
+    @Test
+    public final void whenSubstructSixAndTwoThenReturnFour() throws Exception {
+        calculator.substruct(2d, 1d);
+        assertThat(calculator.getResult(), is(1d));
+    }
 
-	// Деление
-	@Test
-	public void whenDivSixAndTwoThenReturnThree() throws Exception {
-		calculator.div(1d, 1d);
-		assertThat(calculator.getResult(), is(1d));
-	}
+    /**
+     * div testing.
+     * @throws Exception - any
+     */
+    @Test
+    public final void whenDivSixAndTwoThenReturnThree() throws Exception {
+        calculator.div(1d, 1d);
+        assertThat(calculator.getResult(), is(1d));
+    }
 
-	// Деление на 0
-	@Test(expected = ArithmeticException.class)
-	public void whenDivByZeroThenReturnError() throws Exception {
-		calculator.div(1d, 0d);
-	}
+    /**
+     * div by zero testing.
+     * @throws Exception - any
+     */
+    @Test(expected = ArithmeticException.class)
+    public final void whenDivByZeroThenReturnError() throws Exception {
+        calculator.div(1d, 0d);
+    }
 
-	// Умножение
-	@Test
-	public void whenMultipleSixAndTwoThenReturnTwelve() throws Exception {
-		calculator.multiple(1.0, 1.0);
-		assertThat(calculator.getResult(), is(1d));
-	}
+    /**
+     * multiple testing.
+     * @throws Exception - any
+     */
+    @Test
+    public final void whenMultipleSixAndTwoThenReturnTwelve() throws Exception {
+        calculator.multiple(1.0, 1.0);
+        assertThat(calculator.getResult(), is(1d));
+    }
 
 }

@@ -1,12 +1,22 @@
 package ru.nkotkin;
 
 /**
- * Написать вывод Hello World на консоль
+ * Написать вывод Hello World на консоль.
  */
-public class HelloWorld {
+final class HelloWorld {
 
-	public static void main(String[] args) {
-		System.out.print("Hello, World!");
-	}
+    /**
+    * Default constructor.
+    */
+    private HelloWorld() {
+    }
+
+    /**
+    * Print "Hello, World!".
+    * @param args - comand line arguments
+    */
+    public static void main(final String[] args) {
+        System.out.print("Hello, World!");
+    }
 
 }

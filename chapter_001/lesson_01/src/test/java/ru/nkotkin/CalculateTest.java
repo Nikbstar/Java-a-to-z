@@ -2,26 +2,43 @@ package ru.nkotkin;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+/**
+ * Test for Calculate.java.
+ */
 public class CalculateTest {
 
-	private Calculate calc;
+    /**
+     * create calc.
+     */
+    private Calculate calc;
 
-	@Before
-	public void inicialize() {
-		calc = new Calculate();
-	}
+    /**
+     * inicialize method.
+     */
+    @Before
+    public final void inicialize() {
+        calc = new Calculate();
+    }
 
-	@Test
-	public void whenSetStopInEchoThenReturnThreeStops() throws Exception {
-		assertThat(calc.echo("stop"), is("stop stop stop"));
-	}
+    /**
+     * whenSetStopInEchoThenReturnThreeStops.
+     * @throws Exception any.
+     */
+    @Test
+    public final void whenSetStopInEchoThenReturnThreeStops() throws Exception {
+        assertThat(calc.echo("stop"), is("stop stop stop"));
+    }
 
-	@Test
-	public void whenSetNullInEchoThenReturnThreeNulls() throws Exception {
-		assertThat(calc.echo(null), is("null null null"));
-	}
+    /**
+     * whenSetNullInEchoThenReturnThreeNulls.
+     * @throws Exception any.
+     */
+    @Test
+    public final void whenSetNullInEchoThenReturnThreeNulls() throws Exception {
+        assertThat(calc.echo(null), is("null null null"));
+    }
 
 }

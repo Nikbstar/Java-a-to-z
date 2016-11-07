@@ -3,42 +3,66 @@ package ru.nkotkin;
 /**
  * Нужно сделать файл Calculator.java и создать в нем класс Calculator.
  * в классе должно быть внутреннее поле double result.
- * и четыре метода add(double first, double second) по аналогии substruct div multiple.
+ * и четыре метода add(double first, double second) по аналогии
+ *      substruct div multiple.
  * Методы должны быть void.
- * Каждый метод вычисляет арифметическую операцию и записывает ее в поле result.
+ * Каждый метод вычисляет арифметическую операцию и записывает ее
+ *      в поле result.
  * Добавить тест CalculatorTest.
  */
 public class Calculator {
 
-	private double result;
+    /**
+     * Calculate result.
+     */
+    private double result;
 
-	// Сложение
-	public void add(double first, double second) {
-		this.result = first + second;
-	}
+    /**
+     * add method.
+     * @param first - first num
+     * @param second - second num
+     */
+    public final void add(final double first, final double second) {
+        this.result = first + second;
+    }
 
-	// Вычитание
-	public void substruct(double first, double second) {
-		this.result = first - second;
-	}
+    /**
+     * substruct method.
+     * @param first - first num
+     * @param second - second num
+     */
+    public final void substruct(final double first, final double second) {
+        this.result = first - second;
+    }
 
-	// Деление
-	public void div(double first, double second) {
-		if(second != 0d) {
-			this.result = first / second;
-		} else {
-			throw new ArithmeticException("Cound not div by 0");
-		}
-	}
+    /**
+     * div method.
+     * @param first - first num
+     * @param second - second num
+     */
+    public final void div(final double first, final double second) {
+        if (second != 0d) {
+            this.result = first / second;
+        } else {
+            throw new ArithmeticException("Cound not div by 0");
+        }
+    }
 
-	// Умножение
-	public void multiple(double first, double second) {
-		this.result = first * second;
-	}
+    /**
+     * multiple method.
+     * @param first - first num
+     * @param second - second num
+     */
+    public final void multiple(final double first, final double second) {
+        this.result = first * second;
+    }
 
-	// Получить результат
-	public double getResult() {
-		return this.result;
-	}
+    /**
+     * getter method.
+     * @return result
+     */
+    public final double getResult() {
+        return this.result;
+    }
 
 }

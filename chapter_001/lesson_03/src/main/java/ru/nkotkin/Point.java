@@ -8,17 +8,33 @@ package ru.nkotkin;
  */
 public class Point {
 
-	final public double x;
-	final public double y;
+    /**
+     * x coordinate.
+     */
+    private final double x;
+    /**
+     * y coordinate.
+     */
+    private final double y;
 
-	public Point(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
+    /**
+     * Constructor.
+     * @param xArg - x coordinate
+     * @param yArg - y coordinate
+     */
+    public Point(final double xArg, final double yArg) {
+        this.x = xArg;
+        this.y = yArg;
+    }
 
-	public double distanceTo(Point point) {
-		//calculate distance between two points
-		return Math.sqrt(Math.pow((point.x - this.x), 2) + Math.pow((point.y - this.y), 2));
-	}
+    /**
+     * Calculate distance between two points.
+     * @param point - point
+     * @return distance between two points
+     */
+    public final double distanceTo(final Point point) {
+        return Math.sqrt(Math.pow((point.x - this.x), 2)
+               + Math.pow((point.y - this.y), 2));
+    }
 
 }

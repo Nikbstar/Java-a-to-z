@@ -1,15 +1,15 @@
 <project>
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.nkotkin</groupId>
-	<artifactId>chapter_001</artifactId>
-	<version>1.0</version>
-	<packaging>pom</packaging>
-	<modules>
-		<module>lesson_00</module>
-		<module>lesson_01</module>
-		<module>lesson_02</module>
-		<module>lesson_03</module>
-		<module>lesson_04</module>
-		<module>lesson_05</module>
-	</modules>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.nkotkin</groupId>
+    <artifactId>chapter_001</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>lesson_00</module>
+        <module>lesson_01</module>
+        <module>lesson_02</module>
+        <module>lesson_03</module>
+        <module>lesson_04</module>
+        <module>lesson_05</module>
+    </modules>
 </project>
