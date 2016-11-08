@@ -1,138 +1,138 @@
 GitHub:
-	В cmd:
-		git // показать все комманды
-		Логи:
-			git log // показать последние изменения
-			git log --pretty=format:"%h - %an, %ar : %s" // Показать коммиты в краткой форме
-			git log -- since=2.weeks // Показать коммиты за последние 2 недели
-			git log -p -2 // (-p) Показать все изменеия (-2) последних двух коммитов
-			git log --graph --all --decorate --oneline // Показать лог (--graph) с графом, (--all) показать все ветки, (--decorate) раскрасить в цвета и (--oneline) вывести это в одну строку
-		Ветки:
-			git branch // Посмотреть в какой ветки находимся в данный момент
-				git branch -v // Подробно о ветках
-			git branch NewBranch // Создать новую ветку с именем NewBranch
-			git checkout -b NewBranch // Создать новую ветку с именем NewBranch и переключиться на нее
-			git checkout NewBranch // Переключиться на ветку с именем NewBranch
-			git checkout master // Переключиться на основную ветку
-			Находясь в ветке master
-				git merge NewBranch // Слить веску NewBranch с веткой master
-					Но лучше сначала смаржить с веткой NewBranch (чтобы проверить баги), а потом перекинуть всё на master
-	Создать новый репозиторий на диске:
-		Создать пустой репозиторий на github.com и скоприровать в буфер полученный адрес
-		Войти в нужную папку -> cmd:
-			git init
-			git remote add origin https://github.com/address // добавить сетевой репозиторий github
-			git push origin master // Задить данные с диска
-	Синхронизировать репозиторий с диском:
-		В папке проекта -> cmd:
-			git fetch // скачивает файлы во временную папку
-			git rebase // делает слияние (копирует из временной папки в нужную)
-	Клонирование с сайта на диск:
-		На сайте
-			Clone or download -> Copy to clipboard
-		В папке D:\Java -> cmd
-			git clone <paste>
-	Добавить файл с диска на сайт:
-		В папке проекта -> cmd:
-			git add <filename> // Пример: git add src/Commit.java
-				git add *.java // Добавить все файлы с расширением .java
-				git add . // Добавить все файлы
-			git status // покажет что есть файл для закачки
-			git commit -m "Add file" // Добавить коммит
-			git push origin master // Залить файлы на сервер
-	Скачивать новые файлы с репозитория на диск:
-		В папке проекта -> cmd:
-			git fetch // получить новые файлы
-			git pull // добавить их в локальный репозиторий
-	Удалить файл:
-		В папке проекта -> cmd:
-			git rm <filename>
-			git commit -m "Delete file"
-			git push origin master
-	Игнорирование файлов и папок:
-		В папке проекта создать файл .gitignore, в нем:
-			# Комментарий
-			# Игнорировать папку
-			Folder/
-			# Игнорировать все файлы с расширением .fileType
-			*.fileType
+    В cmd:
+        git // показать все комманды
+        Логи:
+            git log // показать последние изменения
+            git log --pretty=format:"%h - %an, %ar : %s" // Показать коммиты в краткой форме
+            git log -- since=2.weeks // Показать коммиты за последние 2 недели
+            git log -p -2 // (-p) Показать все изменеия (-2) последних двух коммитов
+            git log --graph --all --decorate --oneline // Показать лог (--graph) с графом, (--all) показать все ветки, (--decorate) раскрасить в цвета и (--oneline) вывести это в одну строку
+        Ветки:
+            git branch // Посмотреть в какой ветки находимся в данный момент
+                git branch -v // Подробно о ветках
+            git branch NewBranch // Создать новую ветку с именем NewBranch
+            git checkout -b NewBranch // Создать новую ветку с именем NewBranch и переключиться на нее
+            git checkout NewBranch // Переключиться на ветку с именем NewBranch
+            git checkout master // Переключиться на основную ветку
+            Находясь в ветке master
+                git merge NewBranch // Слить веску NewBranch с веткой master
+                    Но лучше сначала смаржить с веткой NewBranch (чтобы проверить баги), а потом перекинуть всё на master
+    Создать новый репозиторий на диске:
+        Создать пустой репозиторий на github.com и скоприровать в буфер полученный адрес
+        Войти в нужную папку -> cmd:
+            git init
+            git remote add origin https://github.com/address // добавить сетевой репозиторий github
+            git push origin master // Задить данные с диска
+    Синхронизировать репозиторий с диском:
+        В папке проекта -> cmd:
+            git fetch // скачивает файлы во временную папку
+            git rebase // делает слияние (копирует из временной папки в нужную)
+    Клонирование с сайта на диск:
+        На сайте
+            Clone or download -> Copy to clipboard
+        В папке D:\Java -> cmd
+            git clone <paste>
+    Добавить файл с диска на сайт:
+        В папке проекта -> cmd:
+            git add <filename> // Пример: git add src/Commit.java
+                git add *.java // Добавить все файлы с расширением .java
+                git add . // Добавить все файлы
+            git status // покажет что есть файл для закачки
+            git commit -m "Add file" // Добавить коммит
+            git push origin master // Залить файлы на сервер
+    Скачивать новые файлы с репозитория на диск:
+        В папке проекта -> cmd:
+            git fetch // получить новые файлы
+            git pull // добавить их в локальный репозиторий
+    Удалить файл:
+        В папке проекта -> cmd:
+            git rm <filename>
+            git commit -m "Delete file"
+            git push origin master
+    Игнорирование файлов и папок:
+        В папке проекта создать файл .gitignore, в нем:
+            # Комментарий
+            # Игнорировать папку
+            Folder/
+            # Игнорировать все файлы с расширением .fileType
+            *.fileType
 
 Maven:
-	Структура папок:
-		src/main/java // Исходныйы код
-		src/main/resources // Ресурсы
-		src/main/webapp // Исходный код web приложения
-		src/test/java // Тесты
-		NOTICE.txt // Заметки
-		README.txt // Описание проекта
-	Должен быть файл pom.xml в корне проэкта
-		<project>
-			<modelVersion>4.0.0</modelVersion> // Всегда 4.0.0
-			<groupId>ru.nkotkin</groupId> // группа
-			<artifactId>java-a-from-z</artifactId> // будет в названии сборки
-			<version>1.0</version> // будет в названии сборки
-			<packaging>jar</packaging> // тип сборки
-		</project>
-	Там где лежит этот файл cmd
-		mvn clean package
-			clean // очистить проект
-			package // компиляция, тестирование и сборка в архив
-		mvn install // добавить в локальный репозиторий
+    Структура папок:
+        src/main/java // Исходныйы код
+        src/main/resources // Ресурсы
+        src/main/webapp // Исходный код web приложения
+        src/test/java // Тесты
+        NOTICE.txt // Заметки
+        README.txt // Описание проекта
+    Должен быть файл pom.xml в корне проэкта
+        <project>
+            <modelVersion>4.0.0</modelVersion> // Всегда 4.0.0
+            <groupId>ru.nkotkin</groupId> // группа
+            <artifactId>java-a-from-z</artifactId> // будет в названии сборки
+            <version>1.0</version> // будет в названии сборки
+            <packaging>jar</packaging> // тип сборки
+        </project>
+    Там где лежит этот файл cmd
+        mvn clean package
+            clean // очистить проект
+            package // компиляция, тестирование и сборка в архив
+        mvn install // добавить в локальный репозиторий
 Тестирование (Junit)
-	В любой программе должны быть входящие и выходящие данные. Тестировать нужно именно эти данные.
-	В тестах содержатся только public void методы
-	Принцип ААА:
-		А – Assign – блок для создания и инициализации входящих, ожидаемых и проверяемых данных.
-		A – Act – блок выполнения действий.
-		А – Assert – блок проверки ожидаемых данных и полученных.
-	assert:
-		Для doublde:
-			private final double DELTA = 1e-15;
-				// result - полученный результат
-				// closeTo(2.0, DELTA) - ожидаемый результат, с точностью сравнения DELTA
-			assertThat(result, closeTo(2.0, DELTA));
-				// или
-			assertEquals(<ОжидаемыйРезультат>, <ПолученныйРезультат>, DELTA);
-				// или без DELTA но с import static org.hamcrest.core.Is.is;
-			assertThat(result, is(2.0));
-	Пример:
-		package ru.nkotkin;
-		import org.junit.Test; // для @Test
-		import org.junit.Ignore; // для @Ignore
-		import static org.hamcrest.core.Is.is; // для is() в assertThat
-		import static org.junit.Assert.*;
-		public class <ClassName>Test {
-			@Test
-			public void whenThen() {
-				// Assign block с переменными
-				......
-				// Act block с вызовом тестируемого метода
-				......
-				// Assert block сравнения результатов
-				assertThat(<ПолученныйРезультат>, is(<ОжидаемыйРезультат>));
-			}
-		}
+    В любой программе должны быть входящие и выходящие данные. Тестировать нужно именно эти данные.
+    В тестах содержатся только public void методы
+    Принцип ААА:
+        А – Assign – блок для создания и инициализации входящих, ожидаемых и проверяемых данных.
+        A – Act – блок выполнения действий.
+        А – Assert – блок проверки ожидаемых данных и полученных.
+    assert:
+        Для doublde:
+            private final double DELTA = 1e-15;
+                // result - полученный результат
+                // closeTo(2.0, DELTA) - ожидаемый результат, с точностью сравнения DELTA
+            assertThat(result, closeTo(2.0, DELTA));
+                // или
+            assertEquals(<ОжидаемыйРезультат>, <ПолученныйРезультат>, DELTA);
+                // или без DELTA но с import static org.hamcrest.core.Is.is;
+            assertThat(result, is(2.0));
+    Пример:
+        package ru.nkotkin;
+        import org.junit.Test; // для @Test
+        import org.junit.Ignore; // для @Ignore
+        import static org.hamcrest.core.Is.is; // для is() в assertThat
+        import static org.junit.Assert.*;
+        public class <ClassName>Test {
+            @Test
+            public void whenThen() {
+                // Assign block с переменными
+                ......
+                // Act block с вызовом тестируемого метода
+                ......
+                // Assert block сравнения результатов
+                assertThat(<ПолученныйРезультат>, is(<ОжидаемыйРезультат>));
+            }
+        }
 
 JavaDoc (Документирование в Java)
-	Пример:
-		JavaDoc для класса:
-			/**
-			 * Class Описание класса
-			 * @author nkotkin
-			 * @since 20.10.2016
-			 * @version 1.0
-			 */
-		JavaDoc для метода:
-			/**
-			 * Описание метода
-			 * @param firstParam описание первого аргумента
-			 * @param secondParam описание второго аргумента
-			 * @return результат
-			 */
-	Теги:
-		@param name – description – Описывает входящий параметр.
-		@return name – description – описывает возвращаемый тип.
-		@throws – описывает возможные исключения, которые может кинуть код.
-		@author – имя и фамилия автора данного кода
-		@since – дата создания
-		@version – версия файла.
+    Пример:
+        JavaDoc для класса:
+            /**
+             * Class Описание класса
+             * @author nkotkin
+             * @since 20.10.2016
+             * @version 1.0
+             */
+        JavaDoc для метода:
+            /**
+             * Описание метода
+             * @param firstParam описание первого аргумента
+             * @param secondParam описание второго аргумента
+             * @return результат
+             */
+    Теги:
+        @param name – description – Описывает входящий параметр.
+        @return name – description – описывает возвращаемый тип.
+        @throws – описывает возможные исключения, которые может кинуть код.
+        @author – имя и фамилия автора данного кода
+        @since – дата создания
+        @version – версия файла.
