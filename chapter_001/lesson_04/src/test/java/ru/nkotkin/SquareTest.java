@@ -8,36 +8,65 @@ import static org.hamcrest.core.Is.is;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+/**
+ * Tests for Square.java.
+ */
 public class SquareTest {
 
-	private Square square;
-	
-	@Before
-	public void initialize() {
-		square = new Square(1f, 1f, 1f);
-	}
+    /**
+     * inicialize.
+     */
+    private Square square;
+    /**
+     * inicialize.
+     */
+    private static final float TEST_RESULT = 3f;;
 
-	@Test
-	public void whenAddXIntoCalculateThenReturnY() throws Exception {
-		assertThat(square.calculate(1), is(3f));
-	}
+    /**
+     * inicialize.
+     */
+    @Before
+    public final void inicialize() {
+        square = new Square(1f, 1f, 1f);
+    }
 
-	@Test
-	public void whenIntoShowAddRangeOfValuesAndStepThenPrintAllYWithStep() throws Exception {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(out));
-		square.show(0, 1, 1);
-		assertThat(out.toString(), is("x = 0: y = 1,0\r\nx = 1: y = 3,0\r\n"));
-	}
+    /**
+     * whenAddXIntoCalculateThenReturnY.
+     * @throws Exception - any exception
+     */
+    @Test
+    public final void whenAddXIntoCalculateThenReturnY() throws Exception {
+        assertThat(square.calculate(1), is(TEST_RESULT));
+    }
 
-	@Test(expected = ArithmeticException.class)
-	public void whenIntoShowStepIsZeroThenExpection() {
-		square.show(1, 1, 0);
-	}
+    /**
+     * whenIntoShowAddRangeOfValuesThenPrintAllY.
+     * @throws Exception - any exception
+     */
+    @Test
+    public final void whenIntoShowAddValuesThenPrintAllY() throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        square.show(0, 1, 1);
+        assertThat(out.toString(), is("x = 0: y = 1,0\r\nx = 1: y = 3,0\r\n"));
+    }
 
-	@Test(expected = ArithmeticException.class)
-	public void whenIntoShowFinishLessStartThenExpection() {
-		square.show(1, 0, 1);
-	}
+    /**
+     * whenIntoShowStepIsZeroThenExpection.
+     * @throws Exception - any exception
+     */
+    @Test(expected = ArithmeticException.class)
+    public final void whenIntoShowStepIsZeroThenExpection() throws Exception {
+        square.show(1, 1, 0);
+    }
+
+    /**
+     * whenIntoShowFinishLessStartThenExpection.
+     * @throws Exception - any exception
+     */
+    @Test(expected = ArithmeticException.class)
+    public final void whenIntoShowFinishLessStartThenExpect() throws Exception {
+        square.show(1, 0, 1);
+    }
 
 }
