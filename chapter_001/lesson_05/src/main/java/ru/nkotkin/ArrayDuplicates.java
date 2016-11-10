@@ -59,9 +59,8 @@ public class ArrayDuplicates {
      * @param iterator - position of null
      */
     private void moveNull(final String[] values, final int iterator) {
-        while (iterator != values.length - 1) {
+        for (int i = iterator; i != values.length - 1; i++) {
             values[iterator] = values[iterator + 1];
-            iterator++;
         }
         values[values.length - 1] = null;
     }

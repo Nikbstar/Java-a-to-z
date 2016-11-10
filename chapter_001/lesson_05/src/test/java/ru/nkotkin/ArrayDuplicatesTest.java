@@ -4,13 +4,20 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+/**
+ * Tests for ArrayDuplicates.java.
+ */
 public class ArrayDuplicatesTest {
 
+    /**
+     * whenAddArrayThenDeleteDuplicatesFromArray.
+     * @throws Exception - any
+     */
     @Test
-    public void whenAddArrayThenDeleteDuplicatesFromArray() {
-        
+    public final void whenAddArrayThenDeleteDuplicatesFromArray() throws Exception {
+
         ArrayDuplicates dblRemove = new ArrayDuplicates();
-        
+
         String[] values = {"one", "one", "one", "two"};
         String[] result = {"one", "two", null, null};
 

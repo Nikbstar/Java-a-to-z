@@ -32,20 +32,28 @@ public class ArrayMatrix {
                 tmp = values[rowIterator][columnIterator];
                 if (leftRotate) {
                     values[rowIterator][columnIterator] = values[columnIterator][values.length - 1 - rowIterator];
-                    values[columnIterator][values.length - 1 - rowIterator] = values[values.length - 1 - rowIterator][values.length - 1 - columnIterator];
-                    values[values.length - 1 - rowIterator][values.length - 1 - columnIterator] = values[values.length - 1 - columnIterator][rowIterator];
+                    values[columnIterator][values.length - 1 - rowIterator] =
+                        values[values.length - 1 - rowIterator][values.length - 1 - columnIterator];
+                    values[values.length - 1 - rowIterator][values.length - 1 - columnIterator] =
+                        values[values.length - 1 - columnIterator][rowIterator];
                     values[values.length - 1 - columnIterator][rowIterator] = tmp;
                 } else {
                     values[rowIterator][columnIterator] = values[values.length - 1 - columnIterator][rowIterator];
-                    values[values.length - 1 - columnIterator][rowIterator] = values[values.length - 1 - rowIterator][values.length - 1 - columnIterator];
-                    values[values.length - 1 - rowIterator][values.length - 1 - columnIterator] = values[columnIterator][values.length - 1 - rowIterator];
+                    values[values.length - 1 - columnIterator][rowIterator] =
+                        values[values.length - 1 - rowIterator][values.length - 1 - columnIterator];
+                    values[values.length - 1 - rowIterator][values.length - 1 - columnIterator] =
+                        values[columnIterator][values.length - 1 - rowIterator];
                     values[columnIterator][values.length - 1 - rowIterator] = tmp;
                 }
             }
         }
     }
 
-    public void doRotate(int[][] values) {
+    /**
+     * override doRotate.
+     * @param values - Array of integers
+     */
+    public final void doRotate(final int[][] values) {
         doRotate(values, false);
     }
 
