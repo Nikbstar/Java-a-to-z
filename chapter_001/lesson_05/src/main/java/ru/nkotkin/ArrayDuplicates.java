@@ -40,7 +40,17 @@ public class ArrayDuplicates {
      * @return true if strings is equils
      */
     private boolean equals(final String str1, final String str2) {
-        return str1 == null ? str2 == null : str1.equals(str2);
+        /**
+         * result
+         */
+        boolean result;
+
+        if (str1 == null) {
+            result = str2 == null;
+        } else {
+            result = str1.equals(str2);
+        }
+        return result;
     }
 
     /**
@@ -48,8 +58,8 @@ public class ArrayDuplicates {
      * @param values - array of strings
      * @param iterator - position of null
      */
-    private void moveNull(String[] values, int iterator) {
-        while(iterator != values.length - 1) {
+    private void moveNull(final String[] values, final int iterator) {
+        while (iterator != values.length - 1) {
             values[iterator] = values[iterator + 1];
             iterator++;
         }
