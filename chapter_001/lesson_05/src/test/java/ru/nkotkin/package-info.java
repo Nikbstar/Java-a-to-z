@@ -1,3 +1,3 @@
 /**
- * lesson 4. Массивы. Tests.
+ * lesson 5. Массивы. Tests.
  */
