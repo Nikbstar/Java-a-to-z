@@ -43,6 +43,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <encoding>UTF-8</encoding>
+                            <configLocation>checkstyle.xml</configLocation>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -73,12 +74,20 @@
                         <id>verify</id>
                         <phase>verify</phase>
                         <goals>
-                            <goal>clean</goal>
-                            <goal>check</goal>
+                            <goal>cobertura</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
