@@ -20,7 +20,7 @@ public class SquareTest {
     /**
      * inicialize.
      */
-    private static final float TEST_RESULT = 3f;;
+    private static final float TEST_RESULT = 3f;
 
     /**
      * inicialize.
