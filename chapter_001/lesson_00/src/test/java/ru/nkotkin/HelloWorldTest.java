@@ -13,10 +13,11 @@ import static org.hamcrest.core.Is.is;
 public class HelloWorldTest {
 
     /**
-    * whenRunHWThenPrintToOut.
-    */
+     * whenRunHWThenPrintToOut.
+     * @throws Exception - any
+     */
     @Test
-    public final void whenRunHWThenPrintToOut() {
+    public final void whenRunHWThenPrintToOut() throws Exception {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         HelloWorld.main(null);

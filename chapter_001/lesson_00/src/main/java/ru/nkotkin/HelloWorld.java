@@ -16,6 +16,7 @@ final class HelloWorld {
     * @param args - comand line arguments
     */
     public static void main(final String[] args) {
+        HelloWorld helloWorld = new HelloWorld();
         System.out.print("Hello, World!");
     }
 

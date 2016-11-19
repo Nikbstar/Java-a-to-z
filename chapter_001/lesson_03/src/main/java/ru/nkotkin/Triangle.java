@@ -73,9 +73,7 @@ public class Triangle {
         }
 
         double p = (this.lineA + this.lineB + this.lineC) / 2;
-        return Math.sqrt(p * (p - this.lineA)
-                           * (p - this.lineB)
-                           * (p - this.lineC));
+        return Math.sqrt(p * (p - this.lineA) * (p - this.lineB) * (p - this.lineC));
     }
 
     /**
