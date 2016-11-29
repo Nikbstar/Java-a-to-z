@@ -1,9 +1,21 @@
 package ru.nkotkin.models;
 
+import java.sql.Struct;
+import java.util.Random;
+
 /**
  * Created by Nikolay Kotkin on 21.11.2016.
  */
 public class Item {
+    /**
+     * item id.
+     */
+    private String id;
+    /**
+     * Random num for item id.
+     */
+    private static final Random RN = new Random();
+
     /**
      * Item name.
      */
@@ -20,8 +32,8 @@ public class Item {
     /**
      * Default constructor.
      */
-    public Item() {
-    }
+/*    public Item() {
+    }*/
 
     /**
      * Constructor.
@@ -30,9 +42,25 @@ public class Item {
      * @param createArg      - set create time
      */
     public Item(final String nameArg, final String descriptionArg, final long createArg) {
+        this.id = this.generateId();
         this.name = nameArg;
         this.description = descriptionArg;
         this.create = createArg;
+    }
+
+    /**
+     * Getter fot item id.
+     * @return item id
+     */
+    public final String getId() {
+        return this.id;
+    }
+
+    /**
+     * Generate item id.
+     */
+    private String generateId() {
+        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 
     /**

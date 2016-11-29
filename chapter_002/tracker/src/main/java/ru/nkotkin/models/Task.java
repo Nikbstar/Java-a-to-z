@@ -4,6 +4,7 @@ package ru.nkotkin.models;
  * Created by Nikolay Kotkin on 21.11.2016.
  */
 public class Task extends Item {
+
     /**
      * Constructor.
      * @param nameArg - name
@@ -14,11 +15,4 @@ public class Task extends Item {
         super(nameArg, descriptionArg, createArg);
     }
 
-    /**
-     * caclulatePrice.
-     * @return - 100%
-     */
-    public final String caclulatePrice() {
-        return "100%";
-    }
 }
