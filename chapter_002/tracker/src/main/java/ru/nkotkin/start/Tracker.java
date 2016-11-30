@@ -9,9 +9,15 @@ import ru.nkotkin.models.Bug;
  */
 final class Tracker {
     /**
+     * Items limit.
+     */
+    private static final int ITEMS_LIMIT = 10;
+
+    /**
      * Items list.
      */
-    private Item[] items = new Item[10];
+    private Item[] items = new Item[ITEMS_LIMIT];
+
     /**
      * position in items array.
      */
