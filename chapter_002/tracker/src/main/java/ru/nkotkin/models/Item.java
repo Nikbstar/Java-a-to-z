@@ -1,6 +1,5 @@
 package ru.nkotkin.models;
 
-import java.sql.Struct;
 import java.util.Random;
 
 /**
@@ -58,6 +57,7 @@ public class Item {
 
     /**
      * Generate item id.
+     * @return item id
      */
     private String generateId() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());

@@ -14,7 +14,7 @@ public class TrackerTest {
      * @throws Exception any
      */
     @Test
-    public void whenThen() throws Exception {
+    public final void whenThen() throws Exception {
         assertThat(5, is(5));
     }
 
