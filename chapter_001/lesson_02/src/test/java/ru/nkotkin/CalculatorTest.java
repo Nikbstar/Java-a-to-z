@@ -19,7 +19,7 @@ import static org.hamcrest.core.Is.is;
      * inicialize method.
      */
     @Before
-    public final void inicialize() {
+    public final void initialize() {
         calculator = new Calculator();
     }
 

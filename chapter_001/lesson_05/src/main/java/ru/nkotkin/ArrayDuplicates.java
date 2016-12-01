@@ -25,8 +25,7 @@ public class ArrayDuplicates {
             for (int insideIterator = values.length - 1;
                  insideIterator != outsideIterator;
                  insideIterator--) {
-                if (this.equals(values[insideIterator],
-                    values[outsideIterator])) {
+                if (this.equals(values[insideIterator], values[outsideIterator])) {
                     this.moveNull(values, insideIterator);
                 }
             }

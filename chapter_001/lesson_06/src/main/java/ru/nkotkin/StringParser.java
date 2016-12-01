@@ -64,6 +64,7 @@ public class StringParser {
      * @return array of chars
      */
     private char[] strToCharArray(final String str) {
+
         /**
          * array of chars.
          */
