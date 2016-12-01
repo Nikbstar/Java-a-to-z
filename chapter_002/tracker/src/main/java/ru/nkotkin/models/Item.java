@@ -1,7 +1,5 @@
 package ru.nkotkin.models;
 
-import java.util.Random;
-
 /**
  * Created by Nikolay Kotkin on 21.11.2016.
  */
@@ -10,10 +8,6 @@ public class Item {
      * item id.
      */
     private String id;
-    /**
-     * Random num for item id.
-     */
-    private static final Random RN = new Random();
 
     /**
      * Item name.
@@ -29,19 +23,12 @@ public class Item {
     private long create;
 
     /**
-     * Default constructor.
-     */
-/*    public Item() {
-    }*/
-
-    /**
      * Constructor.
      * @param nameArg        - set name
      * @param descriptionArg - set description
      * @param createArg      - set create time
      */
     public Item(final String nameArg, final String descriptionArg, final long createArg) {
-        this.id = this.generateId();
         this.name = nameArg;
         this.description = descriptionArg;
         this.create = createArg;
@@ -56,11 +43,11 @@ public class Item {
     }
 
     /**
-     * Generate item id.
-     * @return item id
+     * Setter for item id.
+     * @param idArg item id
      */
-    private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
+    public final void setId(final String idArg) {
+        this.id = idArg;
     }
 
     /**

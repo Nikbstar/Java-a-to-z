@@ -4,6 +4,8 @@ import ru.nkotkin.models.Item;
 import ru.nkotkin.models.Task;
 import ru.nkotkin.models.Bug;
 
+import java.util.Random;
+
 /**
  * Created by Nikolay Kotkin on 21.11.2016.
  */
@@ -12,6 +14,10 @@ final class Tracker {
      * Items limit.
      */
     private static final int ITEMS_LIMIT = 10;
+    /**
+     * Random num for item id.
+     */
+    private static final Random RN = new Random();
 
     /**
      * Items list.
@@ -35,7 +41,18 @@ final class Tracker {
      * @return item
      */
     public Item add(final Item itemArg) {
+        itemArg.setId(this.generateId());
         this.items[position++] = itemArg;
+        return itemArg;
+    }
+
+    /**
+     * Edit item.
+     * @param itemArg item
+     * @return item
+     */
+    public Item edit(final Item itemArg) {
+
         return itemArg;
     }
 
@@ -65,6 +82,14 @@ final class Tracker {
             result[iterator] = this.items[iterator];
         }
         return result;
+    }
+
+    /**
+     * Generate item id.
+     * @return item id
+     */
+    private String generateId() {
+        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 
     /**
