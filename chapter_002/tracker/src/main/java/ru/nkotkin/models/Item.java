@@ -7,7 +7,7 @@ public class Item {
     /**
      * item id.
      */
-    private String id;
+    private int id;
 
     /**
      * Item name.
@@ -38,7 +38,7 @@ public class Item {
      * Getter fot item id.
      * @return item id
      */
-    public final String getId() {
+    public final int getId() {
         return this.id;
     }
 
@@ -46,7 +46,7 @@ public class Item {
      * Setter for item id.
      * @param idArg item id
      */
-    public final void setId(final String idArg) {
+    public final void setId(final int idArg) {
         this.id = idArg;
     }
 

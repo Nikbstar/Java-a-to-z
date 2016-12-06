@@ -25,11 +25,6 @@ final class Tracker {
     private Item[] items = new Item[ITEMS_LIMIT];
 
     /**
-     * position in items array.
-     */
-    private int position = 0;
-
-    /**
      * Default constructor.
      */
     protected Tracker() {
@@ -42,7 +37,12 @@ final class Tracker {
      */
     public Item add(final Item itemArg) {
         itemArg.setId(this.generateId());
-        this.items[this.position++] = itemArg;
+        for (int iterator = 0; iterator != this.items.length; iterator++) {
+            if (this.items[iterator] == null) {
+                this.items[iterator] = itemArg;
+                break;
+            }
+        }
         return itemArg;
     }
 
@@ -52,8 +52,8 @@ final class Tracker {
      * @return item
      */
     public Item edit(final Item itemArg) {
-        for (int iterator = 0; iterator != this.position; iterator++) {
-            if (this.items[iterator] != null && this.items[iterator].getId().equals(itemArg.getId())) {
+        for (int iterator = 0; iterator != this.items.length; iterator++) {
+            if (this.items[iterator] != null && this.items[iterator].getId() == itemArg.getId()) {
                 this.items[iterator] = itemArg;
                 break;
             }
@@ -66,13 +66,9 @@ final class Tracker {
      * @param itemArg - item for deleting
      */
     public void delete(final Item itemArg) {
-        for (int iterator = 0; iterator != this.position; iterator++) {
-            if (this.items[iterator] != null && this.items[iterator].getId().equals(itemArg.getId())) {
-                for (int index = iterator; index != this.position - 1; index++) {
-                    this.items[index] = this.items[index + 1];
-                }
-                this.items[this.position - 1] = null;
-                this.position--;
+        for (int iterator = 0; iterator != this.items.length; iterator++) {
+            if (this.items[iterator] != null && this.items[iterator].getId() == itemArg.getId()) {
+                    this.items[iterator] = null;
                 break;
             }
         }
@@ -83,8 +79,8 @@ final class Tracker {
      * @return Array with all created item's.
      */
     public Item[] getItems() {
-        Item[] result = new Item[this.position];
-        for (int iterator = 0; iterator != this.position; iterator++) {
+        Item[] result = new Item[this.items.length];
+        for (int iterator = 0; iterator != this.items.length; iterator++) {
             result[iterator] = this.items[iterator];
         }
         return result;
@@ -97,10 +93,10 @@ final class Tracker {
      */
     public Item[] getFilterItems(final String nameFilter) {
         int resultIterator = 0;
-        Item[] result = new Item[this.position];
+        Item[] result = new Item[this.items.length];
 
-        for (int iterator = 0; iterator != this.position; iterator++) {
-            if (this.contains(this.items[iterator].getName(), nameFilter)) {
+        for (int iterator = 0; iterator != this.items.length; iterator++) {
+            if (this.items[iterator] != null && this.contains(this.items[iterator].getName(), nameFilter)) {
                 result[resultIterator++] = this.items[iterator];
             }
         }
@@ -112,10 +108,10 @@ final class Tracker {
      * @param id - item id
      * @return found item
      */
-    private Item findById(final String id) {
+    private Item findById(final int id) {
         Item result = null;
         for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
+            if (item != null && item.getId() == id) {
                 result = item;
                 break;
             }
@@ -127,8 +123,8 @@ final class Tracker {
      * Generate item id.
      * @return item id
      */
-    private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
+    private int generateId() {
+        return (int) (System.currentTimeMillis() + RN.nextInt());
     }
 
     /**
@@ -174,7 +170,6 @@ final class Tracker {
                     result = false;
                     break;
                 }
-
             }
         }
         return result;

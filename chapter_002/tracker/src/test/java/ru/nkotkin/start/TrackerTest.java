@@ -64,11 +64,9 @@ public class TrackerTest {
      * @throws Exception any
      */
     @Test
-    public final void whenDeleteFirstTaskThenSecondTaskWillReplaseIt() throws Exception {
-        Item secondTask = new Task("Second task", "Task for testing", 1L);
-        tracker.add(secondTask);
+    public final void whenDeleteFirstTaskThenItWillBeNull() throws Exception {
         tracker.delete(firstTask);
-        assertThat(secondTask, is(tracker.getItems()[0]));
+        assertThat(null, is(tracker.getItems()[0]));
     }
 
     /**

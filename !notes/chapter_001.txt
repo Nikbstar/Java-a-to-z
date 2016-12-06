@@ -1,3 +1,5 @@
+Преенос строк: System.getProperty("line.separator");
+
 1. JVM. Byte code.
     Структура файла *.java:
         package nkotkin; // должно совпадать с папкой пакета
