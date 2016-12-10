@@ -46,15 +46,19 @@ public class CalculateTest {
     }
 
     /**
-     * whenSetNullInEchoThenReturnThreeNulls.
+     * whenAddArgsThenReturnSum.
      * @throws Exception any.
      */
     @Test
-    public final void whenThen() throws Exception {
+    public final void whenAddArgsThenReturnSum() throws Exception {
+        final String ln = System.getProperty("line.separator");
+        final String testString = String.format("ahh ahh ahh%sCalculate...%sSum 2%s", ln, ln, ln);
+
         final String[] args = {"1", "1"};
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         Calculate.main(args);
-        assertThat(out.toString(), is("ahh ahh ahh\r\nCalculate...\r\nSum 2\r\n"));
+
+        assertThat(out.toString(), is(testString));
     }
 }

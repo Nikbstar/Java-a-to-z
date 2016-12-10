@@ -10,14 +10,31 @@ import static org.hamcrest.core.Is.is;
 public class ArraySortTest {
 
     /**
-     * whenThen.
+     * 1.
+     */
+    private static final int NUM_ONE = 1;
+    /**
+     * 2.
+     */
+    private static final int NUM_TWO = 2;
+    /**
+     * 3.
+     */
+    private static final int NUM_THREE = 3;
+    /**
+     * 4.
+     */
+    private static final int NUM_FOUR = 4;
+
+    /**
+     * whenAddTwoArraysThenGetOneSortArray.
      * @throws Exception - any
      */
     @Test
-    public final void whenThen() throws Exception {
-        int[] arr1 = {1, 3};
-        int[] arr2 = {2, 4};
-        int[] arr = {1, 2, 3, 4};
+    public final void whenAddTwoArraysThenGetOneSortArray() throws Exception {
+        int[] arr1 = {NUM_ONE, NUM_THREE};
+        int[] arr2 = {NUM_TWO, NUM_FOUR};
+        int[] arr = {NUM_ONE, NUM_TWO, NUM_THREE, NUM_FOUR};
         ArraySort arrSort = new ArraySort();
         int[] result = arrSort.merge(arr1, arr2);
         assertThat(result, is(arr));
