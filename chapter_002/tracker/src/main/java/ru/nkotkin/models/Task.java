@@ -11,7 +11,7 @@ public class Task extends Item {
      * @param descriptionArg - desc
      * @param createArg - create date
      */
-    public Task(final String nameArg, final String descriptionArg, final long createArg) {
+    public Task(String nameArg, String descriptionArg, long createArg) {
         super(nameArg, descriptionArg, createArg);
     }
 

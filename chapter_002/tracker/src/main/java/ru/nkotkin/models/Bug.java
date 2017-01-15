@@ -11,7 +11,7 @@ public class Bug extends Item {
      * @param descriptionArg - description
      * @param createArg - create date
      */
-    public Bug(final String nameArg, final String descriptionArg, final long createArg) {
+    public Bug(String nameArg, String descriptionArg, long createArg) {
         super(nameArg, descriptionArg, createArg);
     }
 

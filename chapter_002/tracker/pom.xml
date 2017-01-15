@@ -23,7 +23,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>ru.nkotkin.start.Tracker</mainClass>
+                  <mainClass>ru.nkotkin.start.StartUI</mainClass>
                 </transformer>
               </transformers>
             </configuration>

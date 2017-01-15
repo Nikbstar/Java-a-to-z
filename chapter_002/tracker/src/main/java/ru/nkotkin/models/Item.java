@@ -28,7 +28,7 @@ public class Item {
      * @param descriptionArg - set description
      * @param createArg      - set create time
      */
-    public Item(final String nameArg, final String descriptionArg, final long createArg) {
+    public Item(String nameArg, String descriptionArg, long createArg) {
         this.name = nameArg;
         this.description = descriptionArg;
         this.create = createArg;
@@ -46,7 +46,7 @@ public class Item {
      * Setter for item id.
      * @param idArg item id
      */
-    public final void setId(final int idArg) {
+    public final void setId(int idArg) {
         this.id = idArg;
     }
 

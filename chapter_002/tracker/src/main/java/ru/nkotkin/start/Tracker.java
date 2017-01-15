@@ -1,13 +1,30 @@
 package ru.nkotkin.start;
 
 import ru.nkotkin.models.Item;
-import ru.nkotkin.models.Task;
-import ru.nkotkin.models.Bug;
 
 import java.util.Random;
 
 /**
  * Created by Nikolay Kotkin on 21.11.2016.
+ *
+ * Реализовать класс Tracker. Класс трекер - это обертка над массивом.
+ * Для удобного использования в остальном коде проекта.
+ * 1. В классе должно быть поле private Item[] items
+ * 2. Данный класс используется, как хранилище для заявок.
+ * 3. В нем должны быть методы: добавление, редактирования,
+ *      удаления, получения списка всех заявок и списка по фильтру.
+ * Item add(Item);
+ * void update(Item); - метод должен заменить ячейку в массиве.
+ *      найти ячейку надо по циклу сравнивая getId. Обязательно принимать один параметр Item. а не список полей.
+ * void delete(Item);
+ * Item[] findAll();
+ * Item[] findByName(String key);
+ * Item findById(String id);
+ * Каждый метод должен работать с массивом this.items
+ * На каждый метод должен быть написан тест.
+ * Здесь не должно быть системы ввода вывода - ни каких System.in System.out.println.
+ *      Задание будет отклоняться. если в коде будут System.in или System.out.
+ * Проверьте - эти пункты обязательно.
  */
 final class Tracker {
     /**
@@ -27,7 +44,7 @@ final class Tracker {
     /**
      * Default constructor.
      */
-    protected Tracker() {
+    Tracker() {
     }
 
     /**
@@ -35,7 +52,7 @@ final class Tracker {
      * @param itemArg - new item
      * @return item
      */
-    public Item add(final Item itemArg) {
+    public Item add(Item itemArg) {
         itemArg.setId(this.generateId());
         for (int iterator = 0; iterator != this.items.length; iterator++) {
             if (this.items[iterator] == null) {
@@ -51,7 +68,7 @@ final class Tracker {
      * @param itemArg item
      * @return item
      */
-    public Item edit(final Item itemArg) {
+    public Item edit(Item itemArg) {
         for (int iterator = 0; iterator != this.items.length; iterator++) {
             if (this.items[iterator] != null && this.items[iterator].getId() == itemArg.getId()) {
                 this.items[iterator] = itemArg;
@@ -65,7 +82,7 @@ final class Tracker {
      * Delete item.
      * @param itemArg - item for deleting
      */
-    public void delete(final Item itemArg) {
+    public void delete(Item itemArg) {
         for (int iterator = 0; iterator != this.items.length; iterator++) {
             if (this.items[iterator] != null && this.items[iterator].getId() == itemArg.getId()) {
                     this.items[iterator] = null;
@@ -91,7 +108,7 @@ final class Tracker {
      * @param nameFilter - Filter by name
      * @return array of items
      */
-    public Item[] getFilterItems(final String nameFilter) {
+    public Item[] getFilterItems(String nameFilter) {
         int resultIterator = 0;
         Item[] result = new Item[this.items.length];
 
@@ -108,7 +125,7 @@ final class Tracker {
      * @param id - item id
      * @return found item
      */
-    private Item findById(final int id) {
+    private Item findById(int id) {
         Item result = null;
         for (Item item : this.items) {
             if (item != null && item.getId() == id) {
@@ -124,7 +141,7 @@ final class Tracker {
      * @return item id
      */
     private int generateId() {
-        return (int) (System.currentTimeMillis() + RN.nextInt());
+        return Math.abs((int) System.currentTimeMillis() + RN.nextInt());
     }
 
     /**
@@ -133,7 +150,7 @@ final class Tracker {
      * @param sub - sub string
      * @return boolean true if sub string is sub for original
      */
-    private boolean contains(final String origin, final String sub) {
+    private boolean contains(String origin, String sub) {
         /**
          * result.
          */
@@ -180,7 +197,7 @@ final class Tracker {
      * @param str - string
      * @return array of chars
      */
-    private char[] strToCharArray(final String str) {
+    private char[] strToCharArray(String str) {
 
         /**
          * array of chars.
@@ -194,17 +211,4 @@ final class Tracker {
         return resultArr;
     }
 
-    /**
-     * Starter.
-     * @param args - command line args
-     */
-    public static void main(final String[] args) {
-        Tracker tracker = new Tracker();
-        tracker.add(new Task("First task", "Task for testing", 1L));
-        tracker.add(new Task("Second task", "Task for testing", 1L));
-        tracker.add(new Bug("First bug", "Bug for testing", 1L));
-        for (Item item : tracker.getItems()) {
-            System.out.printf("%s - %s\n", item.getId(), item.getName());
-        }
-    }
 }
