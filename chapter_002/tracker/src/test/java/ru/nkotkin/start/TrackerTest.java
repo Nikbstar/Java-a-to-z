@@ -44,7 +44,7 @@ public class TrackerTest {
      */
     @Test
     public final void whenAddNewItemThenItMustBeAdded() throws Exception {
-        assertThat(firstTask, is(tracker.getItems()[0]));
+        assertThat(firstTask, is(tracker.findAll()[0]));
     }
 
     /**
@@ -55,8 +55,8 @@ public class TrackerTest {
     public final void whenEditFirstTaskThenItChangeOnTmp() throws Exception {
         Item tmp = new Task("Edit name", "Edit description", 1L);
         tmp.setId(firstTask.getId());
-        tracker.edit(tmp);
-        assertThat(tmp, is(tracker.getItems()[0]));
+        tracker.update(tmp);
+        assertThat(tmp, is(tracker.findAll()[0]));
     }
 
     /**
@@ -66,7 +66,7 @@ public class TrackerTest {
     @Test
     public final void whenDeleteFirstTaskThenItWillBeNull() throws Exception {
         tracker.delete(firstTask);
-        assertThat(null, is(tracker.getItems()[0]));
+        assertThat(null, is(tracker.findAll()[0]));
     }
 
     /**
@@ -79,7 +79,7 @@ public class TrackerTest {
         Item firstBug = new Bug("First bug", "Bug for testing", 1L);
         tracker.add(secondTask);
         tracker.add(firstBug);
-        assertThat(firstBug, is(tracker.getFilterItems(NAME_FILTER)[0]));
+        assertThat(firstBug, is(tracker.findByName(NAME_FILTER)[0]));
     }
 
 }

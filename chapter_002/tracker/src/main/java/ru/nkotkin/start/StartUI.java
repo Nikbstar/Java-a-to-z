@@ -1,6 +1,5 @@
 package ru.nkotkin.start;
 
-import ru.nkotkin.models.Bug;
 import ru.nkotkin.models.Item;
 import ru.nkotkin.models.Task;
 
@@ -26,27 +25,49 @@ import ru.nkotkin.models.Task;
  * Добавлять к заявки комментарий.
  *
  * В заявке должна быть следующая информация. Имя. Описание. Дата создания. И список комментариев.
+ *
+ * Приложение должно собираться в jar и запускаться командой java –jar tracker.jar.
+ * Для этого в pom.xml нужно добавить manifect.
  */
 public class StartUI {
+    /**
+     * input type.
+     */
+    private Input input;
+
 
     /**
-     * Private constructor.
+     * Instantiates a new Start ui.
+     *
+     * @param argInput the arg input
      */
-    private StartUI() {
+    public StartUI(Input argInput) {
+        this.input = argInput;
     }
+
+
+    /**
+     * Init.
+     */
+    public void init() {
+        Tracker tracker = new Tracker();
+
+        String name = input.ask("Please, enter the Task's name: ");
+
+        tracker.add(new Task(name, "Task for testing", 1L));
+        for (Item item : tracker.findAll()) {
+            if (item != null) {
+                System.out.printf("%s - %s\n", item.getId(), item.getName());
+            }
+        }
+    }
+
     /**
      * Starter.
      * @param args - command line args
      */
     public static void main(String[] args) {
-        Tracker tracker = new Tracker();
-        tracker.add(new Task("First task", "Task for testing", 1L));
-        tracker.add(new Task("Second task", "Task for testing", 1L));
-        tracker.add(new Bug("First bug", "Bug for testing", 1L));
-        for (Item item : tracker.getItems()) {
-            if (item != null) {
-                System.out.printf("%s - %s\n", item.getId(), item.getName());
-            }
-        }
+        Input input = new ConsoleInput();
+        new StartUI(input).init();
     }
 }

@@ -64,11 +64,11 @@ final class Tracker {
     }
 
     /**
-     * Edit item.
+     * Update item.
      * @param itemArg item
      * @return item
      */
-    public Item edit(Item itemArg) {
+    public Item update(Item itemArg) {
         for (int iterator = 0; iterator != this.items.length; iterator++) {
             if (this.items[iterator] != null && this.items[iterator].getId() == itemArg.getId()) {
                 this.items[iterator] = itemArg;
@@ -92,10 +92,10 @@ final class Tracker {
     }
 
     /**
-     * Get all items.
+     * Find all items.
      * @return Array with all created item's.
      */
-    public Item[] getItems() {
+    public Item[] findAll() {
         Item[] result = new Item[this.items.length];
         for (int iterator = 0; iterator != this.items.length; iterator++) {
             result[iterator] = this.items[iterator];
@@ -104,11 +104,11 @@ final class Tracker {
     }
 
     /**
-     * Get filter items.
+     * Find items filter by name.
      * @param nameFilter - Filter by name
      * @return array of items
      */
-    public Item[] getFilterItems(String nameFilter) {
+    public Item[] findByName(String nameFilter) {
         int resultIterator = 0;
         Item[] result = new Item[this.items.length];
 
