@@ -18,6 +18,6 @@ public class StartUITest {
      */
     public static void main(String[] args) {
         Input input = new StubInput("Create first task");
-        new StartUI(input).init();
+        new StartUI(input).mineMenu();
     }
 }
