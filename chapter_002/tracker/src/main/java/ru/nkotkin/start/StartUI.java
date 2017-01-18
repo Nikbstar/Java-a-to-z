@@ -4,6 +4,8 @@ import ru.nkotkin.models.Bug;
 import ru.nkotkin.models.Item;
 import ru.nkotkin.models.Task;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by nkotkin on 15.1.17.
  *
@@ -33,6 +35,11 @@ import ru.nkotkin.models.Task;
  *
  * Приложение должно собираться в jar и запускаться командой
  * java –jar tracker.jar. Для этого в pom.xml нужно добавить manifect.
+ *
+ * Используя класс ConsoleInput в классе StartUI обеспечить
+ * полноценную работу всего приложения. Пользователю должно
+ * отображаться меню. Он может выйти из приложения и выполнять
+ * все действия описанные в первом задании.
  */
 public class StartUI {
     /**
@@ -49,6 +56,11 @@ public class StartUI {
     public static final String CLEAN = "\n\n\n\n\n\n\n\n\n\n";
 
     /**
+     * System message.
+     */
+    private String sysMsg = "";
+
+    /**
      * Instantiates a new Start ui.
      *
      * @param argInput the arg input
@@ -62,16 +74,18 @@ public class StartUI {
      */
     public void mineMenu() {
         String menu;
-        String mineMenu = String.format("%s%s%s%s%s%s%s", CLEAN,
+        String mineMenu = String.format("%s%s\n\n%s%s%s%s%s%s", CLEAN, sysMsg,
                 "Menu:\n",
                 "1. Create item\n",
                 "2. Items list\n",
                 "3. Find item by name\n",
                 "0. Exit\n",
                 "Select an action [0-3]: ");
+        sysMsg = "";
         do {
             menu = this.input.ask(mineMenu);
         } while (!(menu.equals("1") || menu.equals("2") || menu.equals("3") || menu.equals("0")));
+
         if (menu.equals("1")) {
             this.addMenu();
         } else if (menu.equals("2")) {
@@ -84,35 +98,16 @@ public class StartUI {
     }
 
     /**
-     * Find by name menu.
-     */
-    private void findMenu() {
-    }
-
-    /**
-     * list menu.
-     */
-    private void listMenu() {
-        System.out.print(CLEAN);
-        for (Item item : tracker.findAll()) {
-            if (item != null) {
-                System.out.printf("%s - %s\n", item.getId(), item.getName());
-            }
-            this.input.ask("Press any key to continue");
-            this.mineMenu();
-        }
-    }
-
-    /**
      * Add menu.
      */
     private void addMenu() {
         String menu;
-        String addMenu = String.format("%s%s%s%s%s", CLEAN,
+        String addMenu = String.format("%s%s\n\n%s%s%s%s", CLEAN, sysMsg,
                 "1. Task\n",
                 "2. Bug\n",
                 "0. Back to menu\n",
                 "Select an action [0-2]:");
+        sysMsg = "";
         do {
             menu = this.input.ask(addMenu);
         } while (!(menu.equals("1") || menu.equals("2") || menu.equals("0")));
@@ -120,15 +115,47 @@ public class StartUI {
             String name = this.input.ask("Enter the Task name: ");
             String description = this.input.ask("Enter Task description: ");
             tracker.add(new Task(name, description, System.currentTimeMillis()));
+            sysMsg = "Task created!";
         } else if (menu.equals("2")) {
             String name = this.input.ask("Enter the Bug name: ");
-            String description = this.input.ask("Enter Task description: ");
+            String description = this.input.ask("Enter Bug description: ");
             tracker.add(new Bug(name, description, System.currentTimeMillis()));
+            sysMsg = "Bug created!";
         } else {
             this.mineMenu();
         }
         this.mineMenu();
     }
+
+    /**
+     * list menu.
+     */
+    private void listMenu() {
+        String itemType = "";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        System.out.printf("%s%s\n\n%s", CLEAN, sysMsg, "ItemsList:\n");
+        System.out.println("Create date\t\t\t| Item\t| Name\t\t| Description");
+        for (Item item : tracker.findAll()) {
+            if (item != null) {
+                if (item instanceof Bug) {
+                    itemType = "Bug";
+                } else if (item instanceof Task) {
+                    itemType = "Task";
+                }
+                System.out.printf("%s\t| %s\t| %s\t\t| %s\n", dateFormat.format(item.getCreate()),
+                        itemType, item.getName(), item.getDescription());
+            }
+        }
+        this.input.ask("Press any key to continue");
+        this.mineMenu();
+    }
+
+    /**
+     * Find by name menu.
+     */
+    private void findMenu() {
+    }
+
     /**
      * Starter.
      * @param args - command line args
