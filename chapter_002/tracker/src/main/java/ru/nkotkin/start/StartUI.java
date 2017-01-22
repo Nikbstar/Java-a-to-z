@@ -1,6 +1,7 @@
 package ru.nkotkin.start;
 
 import ru.nkotkin.models.Bug;
+import ru.nkotkin.models.Comment;
 import ru.nkotkin.models.Item;
 import ru.nkotkin.models.Task;
 
@@ -66,7 +67,7 @@ public class StartUI {
     /**
      * Clean screen.
      */
-    public static final String CLEAN = "\n\n\n\n\n\n\n\n\n\n";
+    private static final String CLEAN = "\n\n\n\n\n\n\n\n\n\n";
 
     /**
      * System message.
@@ -94,7 +95,7 @@ public class StartUI {
     /**
      * Mine menu.
      */
-    public void mineMenu() {
+    private void mineMenu() {
         this.menu = String.format("%s%s\n\n%s%s%s%s%s%s", CLEAN, this.sysMsg,
                 "Menu:\n",
                 "1. Create item\n",
@@ -123,6 +124,8 @@ public class StartUI {
      * Add menu.
      */
     private void addMenu() {
+        String name;
+        String description;
         this.menu = String.format("%s%s\n\n%s%s%s%s", CLEAN, this.sysMsg,
                 "1. Task\n",
                 "2. Bug\n",
@@ -133,18 +136,91 @@ public class StartUI {
             this.menuSelect = this.input.ask(this.menu);
         } while (!(this.menuSelect.equals("1") || this.menuSelect.equals("2") || this.menuSelect.equals("0")));
         if (this.menuSelect.equals("1")) {
-            String name = this.input.ask("Enter the Task name: ");
-            String description = this.input.ask("Enter Task description: ");
+            do {
+                name = this.input.ask("Enter the Task name: ");
+            } while (name.equals(""));
+            do {
+                description = this.input.ask("Enter Task description: ");
+            } while (description.equals(""));
             this.tracker.add(new Task(name, description, System.currentTimeMillis()));
             this.sysMsg = String.format("Task %s created!", name);
         } else if (this.menuSelect.equals("2")) {
-            String name = this.input.ask("Enter the Bug name: ");
-            String description = this.input.ask("Enter Bug description: ");
+            do {
+                name = this.input.ask("Enter the Bug name: ");
+            } while (name.equals(""));
+            do {
+                description = this.input.ask("Enter Bug description: ");
+            } while (description.equals(""));
             this.tracker.add(new Bug(name, description, System.currentTimeMillis()));
             this.sysMsg = String.format("Bug %s created!", name);
         } else {
             this.mineMenu();
         }
+        this.mineMenu();
+    }
+
+    /**
+     * Show menu selected item.
+     * @param item - selected item.
+     */
+    private void selectItem(Item item) {
+        int iterator = 1;
+        this.sysMsg = String.format("name: %s\tdescription: %s\nCreated: %s",
+                                    item.getName(), item.getDescription(), this.dateFormat.format(item.getCreate()));
+        this.menu = String.format("\n%s%s%s%s%s",
+                "1. Edit\n",
+                "2. Delete\n",
+                "3. Add comment\n",
+                "0. Back to menu\n",
+                "Select an action [0-3]:");
+        do {
+            System.out.printf("%s%s\n\n", CLEAN, this.sysMsg);
+            for (Comment comment : item.getComment()) {
+                if (comment != null) {
+                    System.out.printf("\tComment %d: %s\n", iterator++, comment.getComment());
+                }
+            }
+            this.menuSelect = this.input.ask(this.menu);
+        } while (!(this.menuSelect.equals("1") || this.menuSelect.equals("2")
+                || this.menuSelect.equals("3") || this.menuSelect.equals("0")));
+        this.sysMsg = "";
+        if (this.menuSelect.equals("1")) {
+            this.editMenu(item);
+        } else if (this.menuSelect.equals("2")) {
+            this.sysMsg = String.format("Item %s deleted.", item.getName());
+            this.tracker.delete(item);
+            this.mineMenu();
+        } else if (this.menuSelect.equals("3")) {
+            String comment = "";
+            do {
+                comment = this.input.ask("Enter comment: ");
+            } while (comment.equals(""));
+            item.addComment(new Comment(comment));
+            this.sysMsg = String.format("To %s added new comment!", item.getName());
+            this.selectItem(item);
+        } else {
+            this.mineMenu();
+        }
+    }
+
+    /**
+     * edit item menu.
+     * @param item item
+     */
+    private void editMenu(Item item) {
+        String name = this.input.ask(String.format("Enter the Task name (%s): ", item.getName()));
+        if (name.equals("")) {
+            name = item.getName();
+        }
+        String description = this.input.ask(String.format("Enter Task description (%s): ", item.getDescription()));
+        if (description.equals("")) {
+            description = item.getDescription();
+        }
+        Item newItem = new Item(name, description, item.getCreate());
+        newItem.setId(item.getId());
+        this.tracker.update(newItem);
+        newItem.setComments(item.getComment());
+        this.sysMsg = String.format("Item %s updated!", item.getName());
         this.mineMenu();
     }
 
@@ -178,53 +254,38 @@ public class StartUI {
     }
 
     /**
-     * Show menu selected item.
-     * @param item - selected item.
-     */
-    private void selectItem(Item item) {
-        this.sysMsg = String.format("name: %s\tdescription: %s\nDate creation: %s",
-                                    item.getName(), item.getDescription(), this.dateFormat.format(item.getCreate()));
-        this.menu = String.format("%s%s\n\n%s%s%s%s", CLEAN, this.sysMsg,
-                "1. Edit\n",
-                "2. Delete\n",
-                "0. Back to menu\n",
-                "Select an action [0-2]:");
-        this.sysMsg = "";
-        do {
-            this.menuSelect = this.input.ask(this.menu);
-        } while (!(this.menuSelect.equals("1") || this.menuSelect.equals("2") || this.menuSelect.equals("0")));
-        if (this.menuSelect.equals("1")) {
-            System.out.println("");
-        } else if (this.menuSelect.equals("2")) {
-            this.sysMsg = String.format("Item %s deleted.", item.getName());
-            this.tracker.delete(item);
-            this.mineMenu();
-        } else {
-            System.exit(0);
-        }
-    }
-
-    /**
      * Find by name menu.
      */
     private void findMenu() {
         String name = this.input.ask("Enter item name: ");
-        this.sysMsg = String.format("Finding by item name: %s", name);
-        System.out.printf("%s%s\n\n%s", CLEAN, this.sysMsg, "ItemsList:\n");
-        System.out.println("Create date\t\t\t| Item\t| Name\t\t| Description");
-        for (Item item : this.tracker.findByName(name)) {
-            if (item != null) {
-                if (item instanceof Bug) {
-                    this.itemType = "Bug";
-                } else if (item instanceof Task) {
-                    this.itemType = "Task";
+        int iterator;
+        if (name.equals("")) {
+            this.listMenu();
+        } else {
+            this.sysMsg = String.format("Finding by item name: %s", name);
+            System.out.printf("%s%s\n\n%s", CLEAN, this.sysMsg, "ItemsList:\n");
+            this.sysMsg = "";
+            System.out.println("ID\t| Create date\t\t\t| Item\t| Name\t\t| Description");
+            for (iterator = 0; iterator != this.tracker.findByName(name).length; iterator++) {
+                if (this.tracker.findByName(name)[iterator] != null) {
+                    if (this.tracker.findByName(name)[iterator] instanceof Bug) {
+                        this.itemType = "Bug";
+                    } else if (this.tracker.findByName(name)[iterator] instanceof Task) {
+                        this.itemType = "Task";
+                    }
+                    System.out.printf("%d\t| %s\t| %s\t| %s\t\t| %s\n", iterator + 1,
+                            this.dateFormat.format(this.tracker.findByName(name)[iterator].getCreate()),
+                            this.itemType, this.tracker.findByName(name)[iterator].getName(),
+                            this.tracker.findByName(name)[iterator].getDescription());
                 }
-                System.out.printf("%s\t| %s\t| %s\t\t| %s\n", this.dateFormat.format(item.getCreate()),
-                        this.itemType, item.getName(), item.getDescription());
+            }
+            this.menuSelect = this.input.ask("Enter item id (0 - back to menu): ");
+            if (this.menuSelect.equals("0")) {
+                this.mineMenu();
+            } else {
+                selectItem(this.tracker.findByName(name)[Integer.parseInt(this.menuSelect) - 1]);
             }
         }
-        this.input.ask("Press any key to continue.");
-        this.mineMenu();
     }
 
     /**

@@ -4,6 +4,11 @@ package ru.nkotkin.models;
  * Created by Nikolay Kotkin on 21.11.2016.
  */
 public class Item {
+
+    /**
+     * Comments limit.
+     */
+    private static final int COMMENTS_LIMIT = 50;
     /**
      * item id.
      */
@@ -13,14 +18,21 @@ public class Item {
      * Item name.
      */
     private String name;
+
     /**
      * Item description.
      */
     private String description;
+
     /**
      * Create date.
      */
     private long create;
+
+    /**
+     * Comments list.
+     */
+    private Comment[] comments = new Comment[COMMENTS_LIMIT];
 
     /**
      * Constructor.
@@ -36,7 +48,7 @@ public class Item {
 
     /**
      * Getter fot item id.
-     * @return item id
+     * @return item id.
      */
     public final int getId() {
         return this.id;
@@ -44,7 +56,7 @@ public class Item {
 
     /**
      * Setter for item id.
-     * @param idArg item id
+     * @param idArg item id.
      */
     public final void setId(int idArg) {
         this.id = idArg;
@@ -52,7 +64,7 @@ public class Item {
 
     /**
      * getter for name.
-     * @return string name
+     * @return string name.
      */
     public final String getName() {
         return this.name;
@@ -60,7 +72,7 @@ public class Item {
 
     /**
      * getter for description.
-     * @return string description
+     * @return string description.
      */
     public final String getDescription() {
         return this.description;
@@ -68,10 +80,37 @@ public class Item {
 
     /**
      * getter for create.
-     * @return long date
+     * @return long date.
      */
     public final long getCreate() {
         return this.create;
     }
 
+    /**
+     * Add comment to commentlist.
+     * @param commentArg comment.
+     */
+    public final void addComment(Comment commentArg) {
+        for (int iterator = 0; iterator != this.comments.length; iterator++) {
+            if (this.comments[iterator] == null) {
+                this.comments[iterator] = commentArg;
+                break;
+            }
+        }
+    }
+    /**
+     * getter for comments.
+     * @return comments list.
+     */
+    public final Comment[] getComment() {
+        return this.comments;
+    }
+
+    /**
+     * Copy comments from another item.
+     * @param commentsArg comments list.
+     */
+    public final void setComments(Comment[] commentsArg) {
+        comments = commentsArg;
+    }
 }

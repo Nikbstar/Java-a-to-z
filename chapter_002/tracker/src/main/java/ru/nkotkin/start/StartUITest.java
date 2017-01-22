@@ -17,7 +17,7 @@ public class StartUITest {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        Input input = new StubInput("Create first task");
-        new StartUI(input).mineMenu();
+        //Input input = new StubInput("Create first task");
+        //new StartUI(input).mineMenu();
     }
 }

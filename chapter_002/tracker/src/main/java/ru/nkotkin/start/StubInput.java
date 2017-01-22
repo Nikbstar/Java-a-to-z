@@ -29,7 +29,7 @@ public class StubInput implements Input {
      * @return - answer.
      */
     @Override
-    public String ask(String question) {
+    public final String ask(String question) {
         return answers[position++];
     }
 }
