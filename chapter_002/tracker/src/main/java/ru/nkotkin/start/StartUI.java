@@ -5,8 +5,6 @@ import ru.nkotkin.models.Comment;
 import ru.nkotkin.models.Item;
 import ru.nkotkin.models.Task;
 
-import java.text.SimpleDateFormat;
-
 /**
  * Created by nkotkin on 15.1.17.
  *
@@ -41,6 +39,8 @@ import java.text.SimpleDateFormat;
  * полноценную работу всего приложения. Пользователю должно
  * отображаться меню. Он может выйти из приложения и выполнять
  * все действия описанные в первом задании.
+ *
+ * !!!!Поправить edit и проверка на null в findMenu и findAll!!!
  */
 public class StartUI {
 
@@ -75,15 +75,6 @@ public class StartUI {
     private String sysMsg = "";
 
     /**
-     * item Type.
-     */
-    private String itemType = "";
-
-    /**
-     * Date format.
-     */
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    /**
      * Instantiates a new Start ui.
      *
      * @param argInput the arg input
@@ -93,18 +84,41 @@ public class StartUI {
     }
 
     /**
+     * check that string is int.
+     * @param arg value to check
+     * @return true if is int
+     * @throws NumberFormatException exeption
+     */
+    public final boolean isInt(String arg) throws NumberFormatException {
+        try {
+            Integer.parseInt(arg);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Head of menu.
+     */
+    private void menuHead() {
+        System.out.printf("%s%s\n\n", CLEAN, this.sysMsg);
+        this.sysMsg = "";
+    }
+
+    /**
      * Mine menu.
      */
     private void mineMenu() {
-        this.menu = String.format("%s%s\n\n%s%s%s%s%s%s", CLEAN, this.sysMsg,
+        this.menu = String.format("%s%s%s%s%s%s",
                 "Menu:\n",
                 "1. Create item\n",
                 "2. Items list\n",
                 "3. Find item by name\n",
                 "0. Exit\n",
                 "Select an action [0-3]: ");
-        this.sysMsg = "";
         do {
+            this.menuHead();
             this.menuSelect = this.input.ask(this.menu);
         } while (!(this.menuSelect.equals("1") || this.menuSelect.equals("2")
                 || this.menuSelect.equals("3") || this.menuSelect.equals("0")));
@@ -126,13 +140,13 @@ public class StartUI {
     private void addMenu() {
         String name;
         String description;
-        this.menu = String.format("%s%s\n\n%s%s%s%s", CLEAN, this.sysMsg,
+        this.menu = String.format("%s%s%s%s",
                 "1. Task\n",
                 "2. Bug\n",
                 "0. Back to menu\n",
                 "Select an action [0-2]:");
-        this.sysMsg = "";
         do {
+            this.menuHead();
             this.menuSelect = this.input.ask(this.menu);
         } while (!(this.menuSelect.equals("1") || this.menuSelect.equals("2") || this.menuSelect.equals("0")));
         if (this.menuSelect.equals("1")) {
@@ -164,9 +178,6 @@ public class StartUI {
      * @param item - selected item.
      */
     private void selectItem(Item item) {
-        int iterator = 1;
-        this.sysMsg = String.format("name: %s\tdescription: %s\nCreated: %s",
-                                    item.getName(), item.getDescription(), this.dateFormat.format(item.getCreate()));
         this.menu = String.format("\n%s%s%s%s%s",
                 "1. Edit\n",
                 "2. Delete\n",
@@ -174,16 +185,17 @@ public class StartUI {
                 "0. Back to menu\n",
                 "Select an action [0-3]:");
         do {
-            System.out.printf("%s%s\n\n", CLEAN, this.sysMsg);
+            this.menuHead();
+            System.out.println(item.toString());
             for (Comment comment : item.getComment()) {
+                int iterator = 1;
                 if (comment != null) {
-                    System.out.printf("\tComment %d: %s\n", iterator++, comment.getComment());
+                    System.out.printf("\t\tComment %d: %s\n", iterator++, comment.getComment());
                 }
             }
             this.menuSelect = this.input.ask(this.menu);
         } while (!(this.menuSelect.equals("1") || this.menuSelect.equals("2")
                 || this.menuSelect.equals("3") || this.menuSelect.equals("0")));
-        this.sysMsg = "";
         if (this.menuSelect.equals("1")) {
             this.editMenu(item);
         } else if (this.menuSelect.equals("2")) {
@@ -191,7 +203,7 @@ public class StartUI {
             this.tracker.delete(item);
             this.mineMenu();
         } else if (this.menuSelect.equals("3")) {
-            String comment = "";
+            String comment;
             do {
                 comment = this.input.ask("Enter comment: ");
             } while (comment.equals(""));
@@ -208,11 +220,11 @@ public class StartUI {
      * @param item item
      */
     private void editMenu(Item item) {
-        String name = this.input.ask(String.format("Enter the Task name (%s): ", item.getName()));
+        String name = this.input.ask(String.format("Enter new item name (%s): ", item.getName()));
         if (name.equals("")) {
             name = item.getName();
         }
-        String description = this.input.ask(String.format("Enter Task description (%s): ", item.getDescription()));
+        String description = this.input.ask(String.format("Enter new item description (%s): ", item.getDescription()));
         if (description.equals("")) {
             description = item.getDescription();
         }
@@ -229,27 +241,27 @@ public class StartUI {
      */
     private void listMenu() {
         int iterator;
-        System.out.printf("%s%s\n\n%s", CLEAN, this.sysMsg, "ItemsList:\n");
-        this.sysMsg = "";
-        System.out.println("ID\t| Create date\t\t\t| Item\t| Name\t\t| Description");
+        this.menuHead();
+        System.out.println("ItemsList:");
         for (iterator = 0; iterator != this.tracker.findAll().length; iterator++) {
             if (this.tracker.findAll()[iterator] != null) {
-                if (this.tracker.findAll()[iterator] instanceof Bug) {
-                    this.itemType = "Bug";
-                } else if (this.tracker.findAll()[iterator] instanceof Task) {
-                    this.itemType = "Task";
-                }
-                System.out.printf("%d\t| %s\t| %s\t| %s\t\t| %s\n", iterator + 1,
-                        this.dateFormat.format(this.tracker.findAll()[iterator].getCreate()),
-                        this.itemType, this.tracker.findAll()[iterator].getName(),
-                        this.tracker.findAll()[iterator].getDescription());
+                System.out.printf("%d - %s", iterator + 1, this.tracker.findAll()[iterator].toString());
             }
         }
-        this.menuSelect = this.input.ask("Enter item id (0 - back to menu): ");
+        do {
+            this.menuSelect = this.input.ask("Enter item id (0 - back to menu): ");
+        } while (!this.isInt(this.menuSelect));
         if (this.menuSelect.equals("0")) {
             this.mineMenu();
         } else {
-            selectItem(this.tracker.findAll()[Integer.parseInt(this.menuSelect) - 1]);
+            if ((Integer.parseInt(this.menuSelect) >= 0
+                    && Integer.parseInt(this.menuSelect) < this.tracker.findAll().length)
+                    && !this.tracker.findAll()[Integer.parseInt(this.menuSelect) - 1].equals(null)) {
+                this.selectItem(this.tracker.findAll()[Integer.parseInt(this.menuSelect) - 1]);
+            } else {
+                this.sysMsg = "Wrong item id!";
+                this.mineMenu();
+            }
         }
     }
 
@@ -257,33 +269,33 @@ public class StartUI {
      * Find by name menu.
      */
     private void findMenu() {
-        String name = this.input.ask("Enter item name: ");
         int iterator;
+        String name = this.input.ask("Enter item name: ");
         if (name.equals("")) {
             this.listMenu();
         } else {
             this.sysMsg = String.format("Finding by item name: %s", name);
-            System.out.printf("%s%s\n\n%s", CLEAN, this.sysMsg, "ItemsList:\n");
-            this.sysMsg = "";
-            System.out.println("ID\t| Create date\t\t\t| Item\t| Name\t\t| Description");
+            this.menuHead();
+            System.out.println("ItemsList:");
             for (iterator = 0; iterator != this.tracker.findByName(name).length; iterator++) {
                 if (this.tracker.findByName(name)[iterator] != null) {
-                    if (this.tracker.findByName(name)[iterator] instanceof Bug) {
-                        this.itemType = "Bug";
-                    } else if (this.tracker.findByName(name)[iterator] instanceof Task) {
-                        this.itemType = "Task";
-                    }
-                    System.out.printf("%d\t| %s\t| %s\t| %s\t\t| %s\n", iterator + 1,
-                            this.dateFormat.format(this.tracker.findByName(name)[iterator].getCreate()),
-                            this.itemType, this.tracker.findByName(name)[iterator].getName(),
-                            this.tracker.findByName(name)[iterator].getDescription());
+                    System.out.printf("%d - %s", iterator + 1, this.tracker.findByName(name)[iterator].toString());
                 }
             }
-            this.menuSelect = this.input.ask("Enter item id (0 - back to menu): ");
+            do {
+                this.menuSelect = this.input.ask("Enter item id (0 - back to menu): ");
+            } while (!this.isInt(this.menuSelect));
             if (this.menuSelect.equals("0")) {
                 this.mineMenu();
             } else {
-                selectItem(this.tracker.findByName(name)[Integer.parseInt(this.menuSelect) - 1]);
+                if ((Integer.parseInt(this.menuSelect) >= 0
+                        && Integer.parseInt(this.menuSelect) < this.tracker.findByName(name).length)
+                        && !this.tracker.findByName(name)[Integer.parseInt(this.menuSelect) - 1].equals(null)) {
+                    this.selectItem(this.tracker.findByName(name)[Integer.parseInt(this.menuSelect) - 1]);
+                } else {
+                    this.sysMsg = "Wrong item id!";
+                    this.mineMenu();
+                }
             }
         }
     }
