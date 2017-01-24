@@ -50,7 +50,7 @@ public class StartUI {
     /**
      * initialization tracker.
      */
-    private Tracker tracker = new Tracker();
+    private Tracker tracker;
 
     /**
      * Menu string.
@@ -75,10 +75,12 @@ public class StartUI {
     /**
      * Instantiates a new Start ui.
      *
-     * @param argInput the arg input
+     * @param argInput the arg input.
+     * @param trackerArg a new tracker
      */
-    public StartUI(Input argInput) {
+    public StartUI(Input argInput, Tracker trackerArg) {
         this.input = argInput;
+        this.tracker = trackerArg;
     }
 
     /**
@@ -107,7 +109,7 @@ public class StartUI {
     /**
      * Mine menu.
      */
-    private void mineMenu() {
+    public final void mineMenu() {
         this.menu = String.format("%s%s%s%s%s%s",
                 "Menu:\n",
                 "1. Create item\n",
@@ -211,8 +213,8 @@ public class StartUI {
         do {
             this.menuHead();
             System.out.println(item.toString());
+            int iterator = 1;
             for (Comment comment : item.getComment()) {
-                int iterator = 1;
                 if (comment != null) {
                     System.out.printf("\t\tComment %d: %s\n", iterator++, comment.getComment());
                 }
@@ -303,6 +305,6 @@ public class StartUI {
      */
     public static void main(String[] args) {
         Input input = new ConsoleInput();
-        new StartUI(input).mineMenu();
+        new StartUI(input, new Tracker()).mineMenu();
     }
 }

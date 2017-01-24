@@ -18,7 +18,7 @@ public class StubInput implements Input {
      *
      * @param argAnswers the arg answers
      */
-    public StubInput(String... argAnswers) {
+    public StubInput(String[] argAnswers) {
         this.answers = argAnswers;
 
     }
