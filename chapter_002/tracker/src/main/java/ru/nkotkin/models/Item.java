@@ -8,7 +8,7 @@ public class Item {
     /**
      * Comments limit.
      */
-    private static final int COMMENTS_LIMIT = 50;
+    private static final int COMMENTS_LIMIT = 10;
     /**
      * item id.
      */

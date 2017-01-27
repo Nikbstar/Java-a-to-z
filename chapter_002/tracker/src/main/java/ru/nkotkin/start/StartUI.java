@@ -5,6 +5,8 @@ import ru.nkotkin.models.Comment;
 import ru.nkotkin.models.Item;
 import ru.nkotkin.models.Task;
 
+import java.io.IOException;
+
 /**
  * Created by nkotkin on 15.1.17.
  *
@@ -64,8 +66,9 @@ public class StartUI {
 
     /**
      * Clean screen.
+     * "\n\n\n\n\n\n\n\n\n\n"
      */
-    private static final String CLEAN = "\n\n\n\n\n\n\n\n\n\n";
+    private static final String CLEAN = "";
 
     /**
      * System message.
@@ -130,7 +133,12 @@ public class StartUI {
         } else if (this.menuSelect.equals("3")) {
             this.findMenu();
         } else {
-            System.exit(0);
+            try {
+                System.in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //System.exit(0);
         }
     }
 
