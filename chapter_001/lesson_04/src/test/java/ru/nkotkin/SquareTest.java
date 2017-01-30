@@ -46,7 +46,7 @@ public class SquareTest {
     @Test
     public final void whenIntoShowAddValuesThenPrintAllY() throws Exception {
         final String ln = System.getProperty("line.separator");
-        final String testString = String.format("x = 0: y = 1,0%sx = 1: y = 3,0%s", ln, ln);
+        final String testString = String.format("x = 0: y = 1.0%sx = 1: y = 3.0%s", ln, ln);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));

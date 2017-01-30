@@ -10,8 +10,12 @@ import static org.junit.Assert.assertThat;
  */
 public class ArrayDuplicatesTest {
 
+    /**
+     * whenArrayHasDuplicatesThenDeleteIt.
+     * @throws Exception all.
+     */
     @Test
-    public void whenArrayHasDuplicatesThenDeleteIt() throws Exception {
+    public final void whenArrayHasDuplicatesThenDeleteIt() throws Exception {
         ArrayDuplicates duplicates = new ArrayDuplicates();
         String[] input = {"Lisa", "Olga", "Lisa", "Sveta", "Valeria"};
         String[] except = {"Lisa", "Olga", "Sveta", "Valeria"};
@@ -19,8 +23,12 @@ public class ArrayDuplicatesTest {
         assertThat(result, arrayContainingInAnyOrder(except));
     }
 
+    /**
+     * whenArrayHasAllDuplicatesThenDeleteIt.
+     * @throws Exception all.
+     */
     @Test
-    public void whenArrayHasAllDuplicatesThenDeleteIt() throws Exception {
+    public final void whenArrayHasAllDuplicatesThenDeleteIt() throws Exception {
         ArrayDuplicates duplicates = new ArrayDuplicates();
         String[] input = {"1", "1", "1", "1", "1"};
         String[] except = {"1"};
