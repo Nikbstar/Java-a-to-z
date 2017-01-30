@@ -10,5 +10,6 @@
     </parent>
     <modules>
         <module>tracker</module>
+        <module>shapePrint</module>
     </modules>
 </project>
