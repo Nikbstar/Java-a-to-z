@@ -13,19 +13,11 @@ public class PrintSquare implements Shape {
     /**
      * print the shape.
      *
-     * @param side side length.
      * @return string
      */
     @Override
-    public String pic(int side) {
-        final char[] chars = new char[(side + 1) * side];
-        for (int iterator = 0; iterator != chars.length; iterator++) {
-            if (iterator % side == 0 && iterator != 0) {
-                chars[iterator] = '\n';
-            } else {
-                chars[iterator] = CHARACTER;
-            }
-        }
-        return new String(chars);
+    public final String pic() {
+        return "XXXX\nXXXX\nXXXX\nXXXX\n";
     }
+
 }

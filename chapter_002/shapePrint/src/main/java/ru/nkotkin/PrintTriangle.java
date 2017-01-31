@@ -13,12 +13,12 @@ public class PrintTriangle implements Shape {
     /**
      * print the shape.
      *
-     * @param height triangle height
      * @return string
      */
     @Override
-    public String pic(int height) {
+    public final String pic() {
 
-        return null;
+        return "  X\n XXX\nXXXXX\n";
     }
+
 }
