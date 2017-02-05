@@ -25,7 +25,7 @@ public class Bug extends Item {
     public final String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
-        return String.format("Bug %s\n\tDecsription: %s\n\tCreated: %s\n",
-                this.getName(), this.getDescription(), dateFormat.format(this.getCreate()));
+        return String.format("%s) Bug %s\n\tDecsription: %s\n\tCreated: %s\n",
+                this.getId(), this.getName(), this.getDescription(), dateFormat.format(this.getCreate()));
     }
 }

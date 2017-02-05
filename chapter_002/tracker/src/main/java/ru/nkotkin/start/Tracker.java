@@ -29,6 +29,7 @@ import java.util.Random;
  * Проверьте - эти пункты обязательно.
  */
 final class Tracker {
+
     /**
      * Items limit.
      */
@@ -44,6 +45,11 @@ final class Tracker {
     private Item[] items = new Item[ITEMS_LIMIT];
 
     /**
+     * id for item.
+     */
+    private static int itemId = 1;
+
+    /**
      * Default constructor.
      */
     Tracker() {
@@ -52,9 +58,8 @@ final class Tracker {
     /**
      * Add item in tracker.
      * @param itemArg - new item
-     * @return item
      */
-    public Item add(Item itemArg) {
+    public void add(Item itemArg) {
         itemArg.setId(this.generateId());
         for (int iterator = 0; iterator != this.items.length; iterator++) {
             if (this.items[iterator] == null) {
@@ -62,22 +67,19 @@ final class Tracker {
                 break;
             }
         }
-        return itemArg;
     }
 
     /**
      * Update item.
      * @param itemArg item
-     * @return item
      */
-    public Item update(Item itemArg) {
+    public void update(Item itemArg) {
         for (int iterator = 0; iterator != this.items.length; iterator++) {
             if (this.items[iterator] != null && this.items[iterator].getId() == itemArg.getId()) {
                 this.items[iterator] = itemArg;
                 break;
             }
         }
-        return itemArg;
     }
 
     /**
@@ -127,7 +129,7 @@ final class Tracker {
      * @param id - item id
      * @return found item
      */
-    private Item findById(int id) {
+    public Item findById(int id) {
         Item result = null;
         for (Item item : this.items) {
             if (item != null && item.getId() == id) {
@@ -143,7 +145,7 @@ final class Tracker {
      * @return item id
      */
     private int generateId() {
-        return Math.abs((int) System.currentTimeMillis() + RN.nextInt());
+        return Tracker.itemId++; //Math.abs((int) System.currentTimeMillis() + RN.nextInt());
     }
 
     /**

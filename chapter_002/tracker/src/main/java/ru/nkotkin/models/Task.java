@@ -25,7 +25,7 @@ public class Task extends Item {
     public final String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
-        return String.format("Task %s\n\tDecsription: %s\n\tCreated: %s\n",
-                this.getName(), this.getDescription(), dateFormat.format(this.getCreate()));
+        return String.format("%s) Task %s\n\tDecsription: %s\n\tCreated: %s\n",
+                this.getId(), this.getName(), this.getDescription(), dateFormat.format(this.getCreate()));
     }
 }
