@@ -6,7 +6,6 @@
  * Что все данные мы заносим в программу.
  * А в первом задание пользователь вводит их с консоли.
  */
-
 package ru.nkotkin.start;
 
 import org.junit.Test;
@@ -31,7 +30,7 @@ public class StartUITest {
         String[] answers = {"0", "1", "First task", "Desctription for first task", // Add task
                             "y"}; // Exit
         Input input = new StubInput(answers);
-        new StartUI(input, tracker).mainMenu();
+        new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("First task"));
     }
 
@@ -44,10 +43,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         tracker.add(new Bug("First bug", "Desctription for bug", System.currentTimeMillis()));
         String id = String.format("%d", tracker.findAll()[0].getId());
-        String[] answers = {"2", id, "Edit bug", "", // Edit task name
+        String[] answers = {"2", id, "Edit bug", "Edit description", // Edit task name
                             "y"}; // Exit
         Input input = new StubInput(answers);
-        new StartUI(input, tracker).mainMenu();
+        new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("Edit bug"));
     }
 
@@ -63,7 +62,7 @@ public class StartUITest {
         String[] answers = {"3", id, // Delete task
                             "y"}; // Exit
         Input input = new StubInput(answers);
-        new StartUI(input, tracker).mainMenu();
+        new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0] == null, is(true));
     }
 
@@ -79,7 +78,7 @@ public class StartUITest {
         String[] answers = {"5", id, "First comment", // Add comment
                             "y"}; // Exit
         Input input = new StubInput(answers);
-        new StartUI(input, tracker).mainMenu();
+        new StartUI(input, tracker).init();
         assertThat(tracker.findByName("First")[0].getComment()[0].getComment(), is("First comment"));
     }
 

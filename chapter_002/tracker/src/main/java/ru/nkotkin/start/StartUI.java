@@ -61,14 +61,13 @@ public class StartUI {
     /**
      * Mine menu.
      */
-    public final void mainMenu() {
-        MenuTracker mainMenu = new MenuTracker(this.input, this.tracker);
-        mainMenu.fillAction();
+    public final void init() {
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        menu.fillAction();
         do {
-            mainMenu.show();
-            int key = Integer.valueOf(input.ask("Select: "));
-            mainMenu.select(key);
-        } while (!"y".equals(this.input.ask("Exit? (y/N): ")));
+            menu.show();
+            menu.select(input.ask("Select: ", menu.getRange()));
+        } while (!"y".equals(this.input.ask("Exit? (y/n): ")));
     }
 
     /**
@@ -76,7 +75,7 @@ public class StartUI {
      * @param args - command line args
      */
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
-        new StartUI(input, new Tracker()).mainMenu();
+        Input input = new ValidateInput();
+        new StartUI(input, new Tracker()).init();
     }
 }

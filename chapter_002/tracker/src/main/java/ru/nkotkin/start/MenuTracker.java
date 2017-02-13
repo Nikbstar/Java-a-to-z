@@ -28,26 +28,32 @@ class EditItem implements UserAction {
      */
     @Override
     public void execute(Input inputArg, Tracker trackerArg) {
-        String id = inputArg.ask("Please, input item id: ");
-        Item item = trackerArg.findById(Integer.valueOf(id));
-        Item newItem = null;
-        String name = inputArg.ask(String.format("Please, enter new name (%s): ", item.getName()));
-        if (name.equals("")) {
-            name = item.getName();
-        }
-        String description = inputArg.ask(String.format("Please, enter new description (%s): ", item.getDescription()));
-        if (description.equals("")) {
-            description = item.getDescription();
-        }
-        if (!item.equals(null)) {
-            if (item instanceof Bug) {
-                newItem = new Bug(name, description, item.getCreate());
-            } else if (item instanceof Task) {
-                newItem = new Task(name, description, item.getCreate());
+        if (trackerArg.getItemsNum() == 0) {
+            System.out.println("No items in tracker!");
+        } else {
+            int[] items = new int[trackerArg.getItemsNum()];
+            int length = 0;
+            for (int iterator = 0; iterator != trackerArg.findAll().length; iterator++) {
+                if (!(trackerArg.findAll()[iterator] == null)) {
+                    items[length++] = trackerArg.findAll()[iterator].getId();
+                }
             }
-            newItem.setId(item.getId());
-            trackerArg.update(newItem);
-            newItem.setComments(item.getComment());
+            int id = inputArg.ask("Please, input item id: ", items);
+            Item item = trackerArg.findById(id);
+            Item newItem = null;
+            String name = inputArg.ask(String.format("Please, enter new name (%s): ", item.getName()));
+            String description = inputArg.ask(String.format("Please, enter new description (%s): ",
+                                              item.getDescription()));
+            if (!item.equals(null)) {
+                if (item instanceof Bug) {
+                    newItem = new Bug(name, description, item.getCreate());
+                } else if (item instanceof Task) {
+                    newItem = new Task(name, description, item.getCreate());
+                }
+                newItem.setId(item.getId());
+                trackerArg.update(newItem);
+                newItem.setComments(item.getComment());
+            }
         }
     }
 
@@ -104,13 +110,35 @@ public class MenuTracker {
     private static final int ID_ADD_COMMENT = 5;
 
     /**
+     * array of menu's keys.
+     */
+    private int[] range = {ID_ADD_ITEM, ID_SHOW_ITEMS, ID_EDIT_ITEM, ID_DELETE_ITEMS, ID_FIND_BY_NAME, ID_ADD_COMMENT};
+
+    /**
+     * Item task.
+     */
+    private static final int ITEM_TASK = 1;
+
+    /**
+     * Item bug.
+     */
+    private static final int ITEM_BUG = 2;
+
+    /**
+     * array of item's keys.
+     */
+    private int[] rangeItems = {ITEM_TASK, ITEM_BUG};
+
+    /**
      * input type.
      */
     private Input input;
+
     /**
      * tracker type.
      */
     private Tracker tracker;
+
     /**
      * Array of actions.
      */
@@ -136,6 +164,14 @@ public class MenuTracker {
         this.actions[ID_DELETE_ITEMS] = this.new DeleteItem();
         this.actions[ID_FIND_BY_NAME] = this.new FindByName();
         this.actions[ID_ADD_COMMENT] = this.new AddComment();
+    }
+
+    /**
+     * getter for range.
+     * @return range's array.
+     */
+    public final int[] getRange() {
+        return this.range;
     }
 
     /**
@@ -179,12 +215,12 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input inputArg, Tracker trackerArg) {
-            String type = inputArg.ask("Please, select item type (1 - Task, 2 - Bug): ");
-            if (type.equals("1")) {
+            int type = inputArg.ask("Please, select item type (1 - Task, 2 - Bug): ", rangeItems);
+            if (type == ITEM_TASK) {
                 String name = inputArg.ask("Please, enter the task's name: ");
                 String desc = inputArg.ask("Please, enter the task's desc: ");
                 trackerArg.add(new Task(name, desc, System.currentTimeMillis()));
-            } else if (type.equals("2")) {
+            } else if (type == ITEM_BUG) {
                 String name = inputArg.ask("Please, enter the bug's name: ");
                 String desc = inputArg.ask("Please, enter the bug's desc: ");
                 trackerArg.add(new Bug(name, desc, System.currentTimeMillis()));
@@ -200,6 +236,7 @@ public class MenuTracker {
         public String info() {
             return String.format("%s. %s", this.key(), "Add the new item.");
         }
+
     }
 
     /**
@@ -225,9 +262,21 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input inputArg, Tracker trackerArg) {
-            String id = inputArg.ask("Please, input item id: ");
-            Item item = trackerArg.findById(Integer.valueOf(id));
-            trackerArg.delete(item);
+            if (trackerArg.getItemsNum() == 0) {
+                System.out.println("No items in tracker!");
+            } else {
+                int[] items = new int[trackerArg.getItemsNum()];
+                int length = 0;
+                for (int iterator = 0; iterator != trackerArg.findAll().length; iterator++) {
+                    if (!(trackerArg.findAll()[iterator] == null)) {
+                        items[length++] = trackerArg.findAll()[iterator].getId();
+                    }
+                }
+                int id = inputArg.ask("Please, input item id: ", items);
+                Item item = trackerArg.findById(id);
+                System.out.printf("Item %s deleted!\n", item.getName());
+                trackerArg.delete(item);
+            }
         }
 
         /**
@@ -239,6 +288,7 @@ public class MenuTracker {
         public String info() {
             return String.format("%s. %s", this.key(), "Delete the item.");
         }
+
     }
 
     /**
@@ -264,10 +314,22 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input inputArg, Tracker trackerArg) {
-            String id = inputArg.ask("Please, input item id: ");
-            Item item = trackerArg.findById(Integer.valueOf(id));
-            String comment = inputArg.ask("Enter comment: ");
-            item.addComment(new Comment(comment));
+            if (trackerArg.getItemsNum() == 0) {
+                System.out.println("No items in tracker!");
+            } else {
+                int[] items = new int[trackerArg.getItemsNum()];
+                int length = 0;
+                for (int iterator = 0; iterator != trackerArg.findAll().length; iterator++) {
+                    if (!(trackerArg.findAll()[iterator] == null)) {
+                        items[length++] = trackerArg.findAll()[iterator].getId();
+                    }
+                }
+                int id = inputArg.ask("Please, input item id: ", items);
+                Item item = trackerArg.findById(id);
+                String comment = inputArg.ask("Enter comment: ");
+                System.out.printf("Comment added to %s\n", item.getName());
+                item.addComment(new Comment(comment));
+            }
         }
 
         /**
@@ -279,6 +341,7 @@ public class MenuTracker {
         public String info() {
             return String.format("%s. %s", this.key(), "Add comment to the item.");
         }
+
     }
 
     /**
@@ -304,11 +367,18 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input inputArg, Tracker trackerArg) {
-            String name = inputArg.ask("Please, enter item name: ");
-            for (int iterator = 0; iterator != trackerArg.findByName(name).length; iterator++) {
-                if (trackerArg.findByName(name)[iterator] != null) {
-                    MenuTracker.printItem(trackerArg.findByName(name)[iterator]);
+            if (trackerArg.getItemsNum() == 0) {
+                System.out.println("No items in tracker!");
+            } else {
+                String name = inputArg.ask("Please, enter item name: ");
+                int itemsNum = 0;
+                for (int iterator = 0; iterator != trackerArg.findByName(name).length; iterator++) {
+                    if (trackerArg.findByName(name)[iterator] != null) {
+                        MenuTracker.printItem(trackerArg.findByName(name)[iterator]);
+                        itemsNum++;
+                    }
                 }
+                System.out.printf("Items found: %d\n", itemsNum);
             }
         }
 
@@ -326,7 +396,7 @@ public class MenuTracker {
 
     /**
      * printing item.
-     * @param itemArg finded item.
+     * @param itemArg found item.
      */
     private static void printItem(Item itemArg) {
         int commentIndex = 1;
@@ -366,9 +436,13 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input inputArg, Tracker trackerArg) {
-            for (int iterator = 0; iterator != trackerArg.findAll().length; iterator++) {
-                if (trackerArg.findAll()[iterator] != null) {
-                    MenuTracker.printItem(trackerArg.findAll()[iterator]);
+            if (trackerArg.getItemsNum() == 0) {
+                System.out.println("No items in tracker!");
+            } else {
+                for (int iterator = 0; iterator != trackerArg.findAll().length; iterator++) {
+                    if (trackerArg.findAll()[iterator] != null) {
+                        MenuTracker.printItem(trackerArg.findAll()[iterator]);
+                    }
                 }
             }
         }

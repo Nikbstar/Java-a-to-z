@@ -108,6 +108,20 @@ final class Tracker {
     }
 
     /**
+     * nimber of items.
+     * @return number of items.
+     */
+    public int getItemsNum() {
+        int result = 0;
+        for (Item item : this.findAll()) {
+            if (item != null) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    /**
      * Find items filter by name.
      * @param nameFilter - Filter by name
      * @return array of items
