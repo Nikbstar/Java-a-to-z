@@ -1,5 +1,8 @@
 package ru.nkotkin.start;
 
+import ru.nkotkin.models.Comment;
+import ru.nkotkin.models.Item;
+
 /**
  * Created by nkotkin on 15.1.17.
  *
@@ -38,6 +41,11 @@ package ru.nkotkin.start;
 public class StartUI {
 
     /**
+     * Add comment num.
+     */
+    private static final int ID_ADD_COMMENT = 5;
+
+    /**
      * input type.
      */
     private Input input;
@@ -64,6 +72,46 @@ public class StartUI {
     public final void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillAction();
+        UserAction addComment = new BaseAction("Add comment to the item.") {
+
+            /**
+             * Key of menu action.
+             *
+             * @return int key.
+             */
+            @Override
+            public int key() {
+                return ID_ADD_COMMENT;
+            }
+
+            /**
+             * Perfomens basic action.
+             *
+             * @param inputArg   input type.
+             * @param trackerArg tracker
+             */
+            @Override
+            public void execute(Input inputArg, Tracker trackerArg) {
+                if (trackerArg.getItemsNum() == 0) {
+                    System.out.println("No items in tracker!");
+                } else {
+                    int[] items = new int[trackerArg.getItemsNum()];
+                    int length = 0;
+                    for (int iterator = 0; iterator != trackerArg.findAll().length; iterator++) {
+                        if (!(trackerArg.findAll()[iterator] == null)) {
+                            items[length++] = trackerArg.findAll()[iterator].getId();
+                        }
+                    }
+                    int id = inputArg.ask("Please, input item id: ", items);
+                    Item item = trackerArg.findById(id);
+                    String comment = inputArg.ask("Enter comment: ");
+                    System.out.printf("Comment added to %s\n", item.getName());
+                    item.addComment(new Comment(comment));
+                }
+            }
+
+        };
+        menu.addAction(addComment);
         do {
             menu.show();
             menu.select(input.ask("Select: ", menu.getRange()));

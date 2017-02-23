@@ -8,7 +8,16 @@ import ru.nkotkin.models.Task;
 /**
  * Edit items class.
  */
-class EditItem implements UserAction {
+class EditItem extends BaseAction {
+
+    /**
+     * Constructor.
+     *
+     * @param nameArg name of action.
+     */
+    EditItem(String nameArg) {
+        super(nameArg);
+    }
 
     /**
      * Key of menu action.
@@ -55,16 +64,6 @@ class EditItem implements UserAction {
                 newItem.setComments(item.getComment());
             }
         }
-    }
-
-    /**
-     * info about action.
-     *
-     * @return info string.
-     */
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Edit the item.");
     }
 
 }
@@ -125,6 +124,11 @@ public class MenuTracker {
     private static final int ITEM_BUG = 2;
 
     /**
+     * menu position.
+     */
+    private int menuPosition = 0;
+
+    /**
      * array of item's keys.
      */
     private int[] rangeItems = {ITEM_TASK, ITEM_BUG};
@@ -158,12 +162,24 @@ public class MenuTracker {
      * initialization.
      */
     public final void fillAction() {
-        this.actions[ID_ADD_ITEM] = this.new AddItem(); // Inner class
-        this.actions[ID_SHOW_ITEMS] = new MenuTracker.ShowItems(); // Static class
-        this.actions[ID_EDIT_ITEM] = new EditItem(); // Class in class
-        this.actions[ID_DELETE_ITEMS] = this.new DeleteItem();
-        this.actions[ID_FIND_BY_NAME] = this.new FindByName();
-        this.actions[ID_ADD_COMMENT] = this.new AddComment();
+        this.actions[ID_ADD_ITEM] = this.new AddItem("Add the new item."); // Inner class
+        this.menuPosition++;
+        this.actions[ID_SHOW_ITEMS] = new MenuTracker.ShowItems("Show all items."); // Static class
+        this.menuPosition++;
+        this.actions[ID_EDIT_ITEM] = new EditItem("Edit the item."); // Class in class
+        this.menuPosition++;
+        this.actions[ID_DELETE_ITEMS] = this.new DeleteItem("Delete the item.");
+        this.menuPosition++;
+        this.actions[ID_FIND_BY_NAME] = this.new FindByName("Find items by name.");
+        this.menuPosition++;
+    }
+
+    /**
+     * Add menu.
+     * @param action menu.
+     */
+    public void addAction(UserAction action) {
+        this.actions[this.menuPosition++] = action; // Anonim class in StartUI
     }
 
     /**
@@ -196,7 +212,16 @@ public class MenuTracker {
     /**
      * Add item menu.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
+
+        /**
+         * Constructor.
+         *
+         * @param nameArg name of action.
+         */
+        AddItem(String nameArg) {
+            super(nameArg);
+        }
 
         /**
          * Key of menu action.
@@ -227,22 +252,21 @@ public class MenuTracker {
             }
         }
 
-        /**
-         * info about action.
-         *
-         * @return info string.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add the new item.");
-        }
-
     }
 
     /**
      * Delete item menu.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
+
+        /**
+         * Constructor.
+         *
+         * @param nameArg name of action.
+         */
+        DeleteItem(String nameArg) {
+            super(nameArg);
+        }
 
         /**
          * Key of menu action.
@@ -279,75 +303,21 @@ public class MenuTracker {
             }
         }
 
-        /**
-         * info about action.
-         *
-         * @return info string.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete the item.");
-        }
-
-    }
-
-    /**
-     * Add comment to item.
-     */
-    private class AddComment implements UserAction {
-
-        /**
-         * Key of menu action.
-         *
-         * @return int key.
-         */
-        @Override
-        public int key() {
-            return ID_ADD_COMMENT;
-        }
-
-        /**
-         * Perfomens basic action.
-         *
-         * @param inputArg   input type.
-         * @param trackerArg tracker
-         */
-        @Override
-        public void execute(Input inputArg, Tracker trackerArg) {
-            if (trackerArg.getItemsNum() == 0) {
-                System.out.println("No items in tracker!");
-            } else {
-                int[] items = new int[trackerArg.getItemsNum()];
-                int length = 0;
-                for (int iterator = 0; iterator != trackerArg.findAll().length; iterator++) {
-                    if (!(trackerArg.findAll()[iterator] == null)) {
-                        items[length++] = trackerArg.findAll()[iterator].getId();
-                    }
-                }
-                int id = inputArg.ask("Please, input item id: ", items);
-                Item item = trackerArg.findById(id);
-                String comment = inputArg.ask("Enter comment: ");
-                System.out.printf("Comment added to %s\n", item.getName());
-                item.addComment(new Comment(comment));
-            }
-        }
-
-        /**
-         * info about action.
-         *
-         * @return info string.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add comment to the item.");
-        }
-
     }
 
     /**
      * Find by name.
      */
-    private class FindByName implements UserAction {
+    private class FindByName extends BaseAction {
+
+        /**
+         * Constructor.
+         *
+         * @param nameArg name of action.
+         */
+        FindByName(String nameArg) {
+            super(nameArg);
+        }
 
         /**
          * Key of menu action.
@@ -382,16 +352,6 @@ public class MenuTracker {
             }
         }
 
-        /**
-         * info about action.
-         *
-         * @return info string.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find items by name.");
-        }
-
     }
 
     /**
@@ -416,7 +376,16 @@ public class MenuTracker {
     /**
      * show item list.
      */
-    private static class ShowItems implements UserAction {
+    private static class ShowItems extends BaseAction {
+
+        /**
+         * Constructor.
+         *
+         * @param nameArg name of action.
+         */
+        ShowItems(String nameArg) {
+            super(nameArg);
+        }
 
         /**
          * Key of menu action.
@@ -445,16 +414,6 @@ public class MenuTracker {
                     }
                 }
             }
-        }
-
-        /**
-         * info about action.
-         *
-         * @return info string.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show all items.");
         }
 
     }
